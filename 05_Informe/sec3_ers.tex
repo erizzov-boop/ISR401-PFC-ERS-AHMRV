@@ -1,0 +1,155 @@
+% =====================================================================
+\section{Especificación de requisitos final}
+\label{sec:ers}
+
+\subsection{Estructura del documento conforme a ISO/IEC/IEEE 29148:2018}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Correspondencia entre las secciones del ERS y ISO/IEC/IEEE 29148:2018}
+\label{tab:estructura-ers}
+\begin{tabular}{|C{1.2cm}|L{5.0cm}|L{4.2cm}|C{3.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{§} & \textbf{Sección del ERS} & \textbf{Cláusula de 29148} & \textbf{Extensión}\\ \hline
+1 & Introducción, propósito y alcance & 9.5.2 Introduction & 7 páginas\\ \hline
+2 & Descripción general y partes interesadas & 9.5.3 Overall description & 12 páginas\\ \hline
+3 & Requisitos específicos & 9.5.4 Specific requirements & 34 páginas\\ \hline
+4 & Modelado UML e i* & 9.5.5 Verification (apoyo) & 11 páginas\\ \hline
+5 & Priorización y trazabilidad & 6.5 Requirements traceability & 12 páginas\\ \hline
+6 & Prototipo mínimo viable y limitaciones & 9.5.6 Supporting information & 6 páginas\\ \hline
+7 & Conclusiones y trabajo pendiente & --- & 4 páginas\\ \hline
+8 & Diagramas de flujo de datos & 9.5.5 (incorporada en la PE5) & 5 páginas\\ \hline
+9 & Componentes de inteligencia artificial & 9.5.4 (incorporada en la PE5) & 8 páginas\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Catálogo final de requisitos}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Composición del catálogo de requisitos del ERS final}
+\label{tab:catalogo}
+\begin{tabular}{|L{5.6cm}|C{2.0cm}|C{2.4cm}|L{4.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Tipo} & \textbf{Cantidad} & \textbf{Rango} & \textbf{Observación}\\ \hline
+Requisitos funcionales & 42 & \id{RF-01}--\id{RF-42} & 24 \emph{Must}, 16 \emph{Should}, 2 \emph{Could}\\ \hline
+Requisitos no funcionales & 19 & \id{RNF-01}--\id{RNF-19} & Mapeados a las nueve características de ISO/IEC 25010:2023\\ \hline
+Restricciones de diseño & 10 & \id{RD-01}--\id{RD-10} & Impuestas por el entorno o la contraparte\\ \hline
+Requisitos legales & 8 & \id{RL-01}--\id{RL-08} & Derivados de la LOPDP\\ \hline
+Requisitos de IA & 18 & \id{RF-IA-01}--\id{RNF-IA-12} & Incorporados en la Unidad V\\ \hline
+\textbf{Total auditado} & \textbf{61} & --- & RF + RNF; las restricciones y los requisitos legales se auditan aparte\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Requisitos clave y por qué lo son}
+
+De los cuarenta y dos requisitos funcionales, cinco concentran la propuesta de valor del sistema y
+son los que conviene poder defender uno por uno.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Requisitos clave del SIMPA y su justificación en la evidencia}
+\label{tab:req-clave}
+\begin{tabular}{|C{1.4cm}|L{4.2cm}|L{4.4cm}|L{4.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Requisito} & \textbf{Evidencia que lo sustenta} & \textbf{Por qué es clave}\\ \hline
+\id{RF-07} & Diagnóstico de plaga o enfermedad por imagen & \id{EV-02}: la asesoría técnica visita cada quince días & Es la funcionalidad que reduce la ventana de detección de dos semanas a inmediata\\ \hline
+\id{RF-22} & Estimación del porcentaje de fruta verde con alerta preventiva & \id{EV-04}: la extractora penaliza a partir del 3\,\% & Traslada la decisión de cortar desde el juicio visual a una medición anterior al despacho\\ \hline
+\id{RF-28} & Registro de avance por unidad de labor & \id{EV-05}, \id{EV-06} & Es la entrada de la que dependen la liquidación, el indicador de desempeño y los reportes\\ \hline
+\id{RF-35} & Registro delegado del avance & \id{EV-12}: el 11,3\,\% no tiene teléfono inteligente & Sin él, una parte del personal quedaría fuera del sistema por su equipamiento\\ \hline
+\id{RF-37} & Cálculo de la remuneración semanal & \id{EV-13}: el cálculo manual consume una jornada semanal & Es el proceso de mayor frecuencia y mayor costo administrativo de la organización\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Catálogo completo de requisitos funcionales}
+
+\begin{longtable}{|M{1.8cm}|L{9.6cm}|M{2.4cm}|}
+\caption{Catálogo de requisitos funcionales del ERS final, agrupados por bloque}
+\label{tab:rf-completo}\\
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Nombre del requisito} & \textbf{MoSCoW}\\ \hline
+\endfirsthead
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Nombre del requisito} & \textbf{MoSCoW}\\ \hline
+\endhead
+\multicolumn{3}{|>{\columncolor{grissuave}}l|}{\textbf{Bloque I - Gestión de la estructura productiva}}\\ \hline
+\input{tabla_rf}
+\end{longtable}
+
+\noindent
+La distribución resultante ---24 \emph{Must}, 16 \emph{Should} y 2 \emph{Could}--- concentra el
+57\,\% del catálogo en la categoría de cumplimiento obligatorio. Es una proporción alta y conviene
+justificarla en lugar de presentarla como dato: tres de los \emph{Must} (\id{RF-40} a \id{RF-42})
+implementan obligaciones legales que no admiten priorización, y cuatro más (\id{RF-36} a \id{RF-39})
+cubren el proceso de liquidación semanal, que la organización ejecuta sin excepción todas las
+semanas. Un catálogo con menos \emph{Must} habría exigido declarar opcional alguna de esas dos cosas.
+
+\subsection{Requisitos no funcionales por característica de calidad}
+
+\begin{longtable}{|M{1.8cm}|L{3.6cm}|L{8.4cm}|}
+\caption{Requisitos no funcionales del ERS final y su característica de calidad}
+\label{tab:rnf-completo}\\
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Característica} & \textbf{Descripción abreviada}\\ \hline
+\endfirsthead
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Característica} & \textbf{Descripción abreviada}\\ \hline
+\endhead
+\input{tabla_rnf}
+\end{longtable}
+
+\subsection{Restricciones de diseño y requisitos legales}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Restricciones de diseño y su origen}
+\label{tab:rd}
+\begin{tabular}{|C{1.6cm}|L{6.8cm}|L{6.2cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Restricción} & \textbf{Origen}\\ \hline
+\id{RD-01} & Cliente de campo sobre Android 9.0 o superior & El 88,7\,\% del personal dispone de teléfono inteligente propio (\id{EV-12})\\ \hline
+\id{RD-02} & Operación sin conexión con sincronización diferida & El 74,2\,\% no tiene señal permanente en el lote (\id{EV-12})\\ \hline
+\id{RD-05} & La inferencia se ejecuta dentro de la frontera del sistema & Restricción de conectividad y de costo de servicio externo\\ \hline
+\id{RD-06} & Interfaz adaptada a competencia digital baja & Brecha declarada entre administración y personal de campo (\id{EV-07})\\ \hline
+\id{RD-10} & Registro delegado para quien no dispone de dispositivo & El 11,3\,\% del personal (\id{EV-12})\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+Se presentan cinco de las diez restricciones, las que condicionan decisiones de arquitectura; el
+catálogo completo reside en la Tabla 52 del ERS. Las cinco comparten una propiedad que conviene
+destacar: ninguna proviene de una preferencia técnica del equipo. Todas se derivan de un dato del
+contexto que la elicitación midió.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Requisitos legales derivados de la LOPDP y su implementación}
+\label{tab:rl}
+\begin{tabular}{|C{1.4cm}|C{1.6cm}|L{5.6cm}|L{5.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Artículo} & \textbf{Obligación} & \textbf{Requisito que la implementa}\\ \hline
+\id{RL-04} & Art. 12 & Derecho de acceso de la persona titular a sus datos & \id{RF-40}, exportación por la propia titular\\ \hline
+\id{RL-05} & Art. 13 & Derecho de rectificación & \id{RF-41}, corrección con conservación en bitácora\\ \hline
+\id{RL-06} & Art. 14 & Derecho de eliminación & \id{RF-42}, supresión con disociación del histórico\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+Los tres requisitos de la columna derecha no existían en la Entrega 2A. El ERS enunciaba las
+obligaciones en su mapeo legal sin que ninguna función del sistema las satisficiera, y la inspección
+de la Unidad IV lo registró como el defecto \id{DEF-12}. Su reparación exigía especificar tres
+requisitos funcionales nuevos, de modo que no admitía corrección editorial y se tramitó ante el
+Change Control Board como \id{RFC-03}.
+
+\subsection{Requisitos no funcionales y modelo de calidad}
+
+Los diecinueve requisitos no funcionales se organizan según las nueve características de calidad de
+producto de ISO/IEC 25010:2023 \cite{iso25010}. La cobertura de las nueve se declaró en la Entrega 2A
+y resultó no sostenerse: la inspección de la Unidad IV detectó que se empleaba ``Portabilidad'' como
+característica de primer nivel ---cuando en la edición 2023 sus subcaracterísticas dependen de
+Flexibilidad--- y que ninguna característica de Seguridad física tenía requisito asociado. Ambos
+hallazgos se tramitaron ante el Change Control Board como \id{RFC-02} y se cerraron con la
+reclasificación de \id{RNF-17} y la especificación de \id{RNF-19}.
+
+El caso es ilustrativo de una diferencia que conviene retener: declarar conformidad con una norma y
+aplicar su estructura correctamente son dos cosas distintas, y solo la segunda es verificable.
