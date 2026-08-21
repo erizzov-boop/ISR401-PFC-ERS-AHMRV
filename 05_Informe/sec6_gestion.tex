@@ -1,0 +1,182 @@
+\section{Gestión de requisitos y trazabilidad}
+\label{sec:gestion}
+
+\subsection{Línea base y control de versiones}
+
+El ERS se versiona en el repositorio del equipo junto con sus fuentes \LaTeX{}, de modo que el
+documento entregado se regenera por clonación y compilación. La línea base aprobada por el Change
+Control Board al cierre de la Unidad IV se publicó como etiqueta anotada \id{baseline-v1.1}, y la
+Unidad V cierra con la etiqueta \id{baseline-final}.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Historial de versiones del ERS}
+\label{tab:versiones}
+\begin{tabular}{|C{2.0cm}|C{2.2cm}|C{2.4cm}|L{7.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Versión} & \textbf{Rev. interna} & \textbf{Etiqueta Git} & \textbf{Contenido}\\ \hline
+v1.0 & 3.0 & --- & Entrega 2A. Documento sometido a inspección formal\\ \hline
+v1.1 & 3.1 & \id{baseline-v1.1}, \id{baseline-final} & Correcciones de la inspección, cambios aprobados por el CCB, y cierre de la Unidad V: auditoría, DFD, casos de uso, criterios BDD y componentes de IA\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+La numeración merece una aclaración porque conviven dos. El ERS registra internamente sus revisiones
+desde la Entrega 1A y llegó a la Entrega 2A como revisión interna 3.0; la asignatura designa a ese
+mismo documento como v1.0. Se adopta la numeración de la asignatura como versión oficial, declarada
+de forma idéntica en la portada del ERS, en su historial, en el \id{CHANGELOG.md} y en la etiqueta de
+Git, y el historial del documento rotula su columna como \emph{revisión interna} para que la
+coexistencia no produzca ambigüedad.
+
+\subsection{Control de cambios}
+
+Las tres solicitudes tramitadas ante el Change Control Board se recogen en la
+\S\ref{sec:validacion}. El procedimiento seguido ---formulario con análisis de impacto derivado de la
+matriz, deliberación con roles diferenciados, decisión motivada y acta firmada--- responde al modelo
+de control integrado de cambios del PMBOK \cite{pmbok7}.
+
+El análisis de impacto de cada solicitud se obtuvo recorriendo la matriz de trazabilidad y filtrando
+por el requisito afectado, no por estimación. Esa diferencia es la que separa un análisis de impacto
+de una conjetura informada: \id{RFC-03} declaró afectar a las filas \id{TR-03} y \id{TR-34} y añadir
+\id{TR-53} a \id{TR-55}, y esos identificadores son verificables en el artefacto.
+
+% =====================================================================
+%  Sección de trazabilidad extremo a extremo — informe PE5
+%  Requiere: longtable, array, xcolor, colortbl, float, y la macro \id
+% =====================================================================
+
+\subsection{Trazabilidad extremo a extremo}
+
+\subsubsection*{Cadena de trazabilidad adoptada}
+
+La trazabilidad de las entregas anteriores enlazaba la parte interesada con el requisito, el caso de
+uso y el prototipo. Esa cadena bastaba para responder de dónde viene un requisito y qué pantalla lo
+materializa, pero no para responder qué proceso lo ejecuta, sobre qué estado del dominio actúa ni
+con qué condición se acepta. La Unidad~V extiende la cadena a ocho eslabones:
+
+\begin{center}
+\footnotesize
+Fuente $\rightarrow$ Requisito $\rightarrow$ Caso de uso $\rightarrow$ Clase/Módulo $\rightarrow$
+Proceso DFD $\rightarrow$ Estado $\rightarrow$ Criterio BDD $\rightarrow$ Caso de prueba
+\end{center}
+
+\noindent
+Tres eslabones son nuevos y ninguno existía como columna antes de esta práctica:
+
+\begin{itemize}[leftmargin=*, nosep]
+  \item \textbf{Proceso DFD.} No existía porque el ERS no tenía diagramas de flujo de datos. Se
+        incorporaron en la \S8 del ERS con siete procesos, uno por bloque funcional, de modo que la
+        columna se deriva del bloque en que el propio documento ya ubicaba cada requisito y no
+        introduce una clasificación nueva.
+  \item \textbf{Estado.} Enlaza el requisito con la transición de la máquina de estados sobre la que
+        actúa. El ERS modela el ciclo de vida de dos entidades: el racimo y la alerta.
+  \item \textbf{Criterio BDD.} Enlaza el requisito con su condición de aceptación en formato
+        Dado--Cuando--Entonces: \id{CA-01} a \id{CA-24} cuando procede de una historia de usuario y
+        \id{CB-01} a \id{CB-37} cuando se deriva de la ficha del requisito.
+\end{itemize}
+
+\subsubsection*{Criterio de completitud de una traza}
+
+Una fila se declara \textbf{completa} cuando tiene los seis eslabones exigibles: fuente, caso de uso,
+módulo, proceso, criterio de aceptación y caso de prueba. Se declara \textbf{parcial} si falta uno y
+\textbf{huérfana} si faltan dos o más.
+
+El eslabón de estado no entra en ese conteo, y la razón conviene declararla porque afecta a la
+lectura de la métrica. Solo dos entidades del dominio tienen ciclo de vida modelado; los requisitos
+cuyo objeto no es un racimo ni una alerta ---gestión de personal, planificación de labores,
+generación de reportes--- no tienen estado asociado. Exigirles uno obligaría a inventar máquinas de
+estados sin sustento en el dominio para que una métrica saliera mejor. La columna declara
+\emph{No aplica} en esas 34 filas, y esa declaración es información, no un vacío.
+
+\subsubsection*{Matriz completa}
+
+{\scriptsize
+\begin{longtable}{|M{0.7cm}|L{1.9cm}|M{1.3cm}|M{1.0cm}|M{1.0cm}|M{1.1cm}|L{3.2cm}|M{1.1cm}|M{1.0cm}|M{1.3cm}|}
+\caption{Matriz de trazabilidad extremo a extremo (73 filas). El asterisco indica que el proceso se deriva del caso de uso y no del bloque funcional, por tratarse de un requisito no funcional o de una restricción. En la columna de estado, \textbf{R} designa la máquina de estados del racimo y \textbf{A} la de la alerta.}
+\label{tab:matriz-e2e}\\
+\hline
+\rowcolor{grisclaro}\textbf{N.º} & \textbf{Fuente} & \textbf{Requisito} & \textbf{CU} & \textbf{Módulo} & \textbf{Proceso} & \textbf{Estado} & \textbf{BDD} & \textbf{Prueba} & \textbf{Traza}\\ \hline
+\endfirsthead
+\hline
+\rowcolor{grisclaro}\textbf{N.º} & \textbf{Fuente} & \textbf{Requisito} & \textbf{CU} & \textbf{Módulo} & \textbf{Proceso} & \textbf{Estado} & \textbf{BDD} & \textbf{Prueba} & \textbf{Traza}\\ \hline
+\endhead
+\input{tabla_e2e}
+\end{longtable}}
+
+\subsubsection*{Diagnóstico y elementos huérfanos}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Diagnóstico de la trazabilidad}
+\label{tab:diag-traza}
+\begin{tabular}{|L{7.0cm}|C{2.4cm}|L{6.2cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Indicador} & \textbf{Valor} & \textbf{Lectura}\\ \hline
+Filas de la matriz & 73 & Cubre 42 RF, 10 RNF, 3 RD y los 18 requisitos de IA\\ \hline
+Trazas completas & 73 (100\,\%) & Ninguna fila carece de un eslabón exigible\\ \hline
+Trazas parciales & 0 & ---\\ \hline
+Trazas huérfanas & 0 & ---\\ \hline
+Filas con estado modelado & 26 & Las 47 restantes declaran \emph{No aplica}\\ \hline
+Filas con criterio BDD & 71 & Las 2 restantes son restricciones de diseño\\ \hline
+Filas sin prototipo & 1 & Requisito de prioridad distinta de \emph{Must}\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+La matriz no arroja elementos huérfanos, pero sí tres vacíos que se declaran de forma expresa en
+lugar de rellenarlos:
+
+\begin{enumerate}[leftmargin=*, nosep]
+  \item \textbf{Requisitos sin prototipo de interfaz.} \id{RF-03}, \id{RF-27} y \id{RF-34}. Los tres
+        son de prioridad distinta de \emph{Must}, de modo que el vacío no incumple la exigencia de
+        prototipar las pantallas críticas. Se difiere a la Entrega~4.
+  \item \textbf{Restricciones sin criterio de aceptación.} \id{RD-07} y \id{RD-10}. Una restricción
+        de diseño no describe un comportamiento del sistema sino una condición impuesta sobre su
+        construcción, y por tanto no admite criterio de aceptación en el mismo sentido que un
+        requisito. Quedan fuera del denominador de la métrica de verificabilidad.
+  \item \textbf{Requisitos de IA sin criterio BDD en columna propia.} Los dieciocho requisitos de
+        inteligencia artificial llevan su criterio de aceptación dentro de la propia ficha de la \S9
+        del ERS, en formato Dado--Cuando--Entonces, y por eso la columna remite a ella en lugar de
+        citar un identificador \id{CA-XX} o \id{CB-XX}. La decisión evita duplicar el criterio en dos
+        lugares del documento, que es precisamente el mecanismo que produjo los defectos de
+        consistencia detectados en la Unidad~IV.
+  \item \textbf{Requisitos no funcionales sin proceso propio.} Un requisito no funcional no realiza
+        un proceso: lo condiciona. Se les asigna el proceso mayoritario de los requisitos funcionales
+        que comparten su caso de uso, y la matriz lo marca con asterisco para que la derivación sea
+        visible y no se confunda con una asignación directa.
+\end{enumerate}
+
+\subsubsection*{Sincronización entre el ERS y el tablero CASE}
+
+La trazabilidad solo es útil si el tablero refleja el documento. El contraste cuantitativo entre
+ambos artefactos, antes de la actualización del backlog, es el siguiente:
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Sincronización entre el ERS y el tablero de Jira}
+\label{tab:sincro}
+\begin{tabular}{|L{5.4cm}|C{1.8cm}|C{2.0cm}|C{1.8cm}|L{4.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Elemento} & \textbf{En el ERS} & \textbf{En el tablero} & \textbf{Divergencia} & \textbf{Acción}\\ \hline
+Epics / bloques funcionales & 7 & 7 & 0 & Sin divergencia\\ \hline
+Stories / requisitos funcionales & 48 & 39 & 9 & Cargar \id{RF-40} a \id{RF-42} y \id{RF-IA-01} a \id{RF-IA-06}\\ \hline
+Sub-tasks / criterios de aceptación & 79 & 38 & 41 & Cargar \id{CB-01} a \id{CB-37} y los 18 criterios de la \S9\\ \hline
+Historias de usuario & 24 & 19 & 5 & Cargar \id{HU-20} a \id{HU-24}\\ \hline
+Filas de trazabilidad & 73 & 52 & 21 & Reexportar el CSV\\ \hline
+\multicolumn{3}{|r|}{\textbf{Índice de sincronización}} & \multicolumn{2}{l|}{\textbf{67,1\,\%}}\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+El 67,1\,\% mide la proporción de elementos del ERS reflejados en el tablero \emph{antes} de esta
+práctica, y la divergencia tiene una causa única y verificable: la carga inicial del backlog se
+ejecutó en la Unidad~IV, antes de que el Change Control Board aprobara \id{RFC-01} a \id{RFC-03}. Los
+cambios se implementaron en el documento y no se propagaron al tablero.
+
+El hallazgo es más interesante que el número. Un backlog desincronizado no es un descuido puntual:
+es la consecuencia previsible de mantener dos representaciones del mismo conjunto de requisitos sin
+un mecanismo que las reconcilie. La misma causa produjo, en la Unidad~IV, once de los treinta y tres
+defectos de consistencia detectados en la inspección. La acción correctiva registrada no es solo
+cargar los elementos que faltan, sino incorporar al procedimiento de cierre de cada RFC la
+actualización del tablero como paso obligatorio, del mismo modo que ya lo es la actualización del
+\id{CHANGELOG.md}.
