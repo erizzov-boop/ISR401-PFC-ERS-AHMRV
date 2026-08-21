@@ -1,0 +1,170 @@
+\appendix
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+
+\section{Instrumento de auditoría de calidad}
+
+El instrumento completo se versiona en \id{02\_Auditoria/AnexoA\_auditoria\_calidad.xlsx} y contiene
+seis hojas: \emph{Auditoria} con la tabla de las seis métricas y sus fórmulas vivas;
+\emph{Antes\_Despues} con la comparación de las dos mediciones; \emph{Conteos\_base} con el valor y la
+procedencia de cada conteo; \emph{Conflictos\_M2} con los pares analizados y los conflictos hallados;
+\emph{Trazabilidad\_M4} con el recuento por eslabón; \emph{Modificabilidad\_M5} con la muestra de
+acoplamiento; y \emph{Reinspeccion\_M6} con los defectos residuales.
+
+Ninguna celda de valor está escrita a mano: todas son fórmulas sobre la hoja de conteos, de modo que
+modificar un conteo recalcula la métrica y su veredicto. La tabla resumen se reproduce en la
+\S\ref{sec:metricas}.
+
+\section{Banco de preguntas del tribunal y respuestas anticipadas}
+
+Las veintidós preguntas siguientes son las del Anexo B de la guía. Para cada una se registra la
+respuesta preparada por el equipo y el artefacto donde se verifica, conforme al Paso 4.b.
+
+\subsection*{Fundamentos}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{1} & \textbf{¿Cuál es la frontera del sistema y qué queda deliberadamente fuera?}\\ \hline
+& La frontera se declara en el DFD de nivel 0 (\S8.2 del ERS). Dentro quedan la captura de datos en campo, el diagnóstico, la planificación, la liquidación y los reportes. Fuera quedan tres cosas por decisión y no por omisión: la contabilidad y la nómina formal de la organización, que se llevan en otro sistema; la operación de la planta extractora, de la que solo se recibe la calificación de calidad; y la ejecución de la aplicación fitosanitaria, sobre la que el sistema recomienda pero nunca decide. \newline \emph{Artefacto:} \S8.2 del ERS, Figura del DFD de nivel 0.\\ \hline
+\rowcolor{grisclaro}\textbf{2} & \textbf{¿Qué diferencia hay entre el contexto y el límite del sistema en su proyecto?}\\ \hline
+& El contexto es todo lo que influye en el sistema aunque no interactúe con él: la estacionalidad del cultivo, la política de penalización de la extractora, la LOPDP. El límite es la línea que separa lo que el sistema hace de lo que hacen otros. La distinción tuvo consecuencia práctica: la asesoría técnica es contexto ---aporta fichas y recibe diagnósticos--- pero no es clase de usuario, porque no opera la aplicación. Confundir ambas cosas fue lo que produjo el defecto \id{RES-07} en la primera medición de la cobertura de actores. \newline \emph{Artefacto:} \S2.3 y \S2.4 del ERS; recuadro sobre clase de usuario y parte interesada.\\ \hline
+\rowcolor{grisclaro}\textbf{3} & \textbf{¿Qué modelo de proceso siguieron y por qué era el adecuado para su dominio?}\\ \hline
+& Un proceso documental incremental, no ágil puro. La razón es que ocho requisitos legales de la LOPDP deben poder demostrarse ante un tercero, y una obligación legal no se satisface con una historia priorizada. Pero se mantuvieron historias de usuario y criterios en formato BDD porque el dominio es volátil: la evidencia \id{EV-13} apareció después de cerrar la especificación y añadió cuatro requisitos. Convivir con ambas representaciones tuvo un costo medible, y lo declaramos: once de los treinta y tres defectos de la inspección son de consistencia entre ellas. \newline \emph{Artefacto:} \S2.3 del informe; \S\ref{sec:metricas}, lectura de M2.\\ \hline
+\end{longtable}
+
+\subsection*{Elicitación}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{4} & \textbf{¿Qué técnica les aportó los requisitos que no habrían descubierto de otro modo?}\\ \hline
+& El cuestionario ampliado \id{EV-12}, con $n=62$. Las entrevistas con la administración describieron los procesos formales; el cuestionario al personal de campo reveló que el 11,3\,\% no dispone de teléfono inteligente y que el 74,2\,\% no tiene señal permanente en el lote. Ninguno de los dos datos habría salido de una entrevista con la administración, porque la administración no los conocía. De ahí nacieron \id{RF-35} y \id{RD-02}. \newline \emph{Artefacto:} \id{EV-12}; \S2.6 y \S2.7 del ERS.\\ \hline
+\rowcolor{grisclaro}\textbf{5} & \textbf{¿Qué \emph{stakeholder} quedó subrepresentado y cómo lo compensaron?}\\ \hline
+& El trabajador agrícola. Es la clase de usuario más numerosa y la de competencia digital declarada como baja, y el formato de entrevista no funcionó con ella. Se compensó con dos instrumentos: el cuestionario \id{EV-12}, que alcanzó a las sesenta y dos personas, y la observación directa en campo. Aun así la compensación es parcial y se declara como tal: el trabajador aportó datos sobre su contexto, no requisitos formulados por él. \newline \emph{Artefacto:} \S2.3 del ERS; \id{EV-05}, \id{EV-06}, \id{EV-12}.\\ \hline
+\rowcolor{grisclaro}\textbf{6} & \textbf{Muéstrenme un requisito y díganme de qué evidencia concreta nació.}\\ \hline
+& \id{RF-37}, cálculo de la remuneración semanal. Nació de \id{EV-13}, la hoja de liquidación que la organización facilitó y que documenta que el cálculo manual consume una jornada administrativa completa cada semana. La evidencia llegó después de cerrar la especificación, lo que obligó a incorporar \id{RF-36} a \id{RF-39} y produjo en cascada el defecto crítico \id{DEF-02}. \newline \emph{Artefacto:} \id{EV-13}; ficha de \id{RF-37} en la \S3.2 del ERS.\\ \hline
+\end{longtable}
+
+\subsection*{Especificación}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{7} & \textbf{Elijan un RNF y expliquen cómo se comprueba objetivamente.}\\ \hline
+& \id{RNF-10}, disponibilidad mensual del servicio de respaldo igual o superior al 99\,\%. Se comprueba totalizando el tiempo de indisponibilidad registrado en un mes natural y verificando que no supera 7~h~12~min, que es el 1\,\% de las 720~h del período. El criterio \id{CB-28} lo enuncia en formato Dado--Cuando--Entonces. El valor de 7~h~12~min es, además, una corrección: el ERS declaraba 7~h~18~min y la inspección lo detectó como defecto \id{DEF-20}. \newline \emph{Artefacto:} Tabla 49 del ERS; criterio \id{CB-28} del Apéndice F.\\ \hline
+\rowcolor{grisclaro}\textbf{8} & \textbf{¿Qué requisito les costó más redactar de forma verificable y por qué?}\\ \hline
+& \id{RF-16}, el indicador de desempeño del personal. La versión original decía que el sistema calcula un indicador, y su criterio de verificación era que el sistema calcula un indicador: cualquier salida lo satisfacía. La inspección lo registró como \id{DEF-18}. Corregirlo exigió fijar fórmula, tres componentes, sus pesos y una escala de 0 a 100, y esos valores los eligió el equipo: están declarados como decisión de análisis pendiente de validar con la organización. \newline \emph{Artefacto:} \S5.5 del informe, valores fijados durante la corrección.\\ \hline
+\rowcolor{grisclaro}\textbf{9} & \textbf{¿Por qué este caso de uso incluye a aquel y no lo extiende?}\\ \hline
+& \id{CU-01}, \id{CU-02} y \id{CU-06} \textbf{incluyen} a \id{CU-18} porque la explicación de una decisión automática ocurre siempre, no bajo condición: sin ella el caso de uso base no está completo. En cambio \id{CU-15} \textbf{extiende} con \id{CU-16} porque la alerta solo se genera si el porcentaje de afectación supera el umbral. La regla que aplicamos es que la inclusión es obligatoria e incondicional y la extensión es condicional. \newline \emph{Artefacto:} \S4 del ERS, relaciones de inclusión y extensión.\\ \hline
+\end{longtable}
+
+\subsection*{Validación}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{10} & \textbf{¿Cuántos defectos halló la inspección y cuáles siguen abiertos?}\\ \hline
+& Treinta y tres defectos únicos: 4 críticos, 24 mayores y 5 menores. Se corrigieron los veintiocho críticos y mayores ---veinticinco directamente y tres mediante RFC--- y cuatro de los cinco menores. Sigue abierto uno solo: \id{DEF-25}, sobre \id{RF-09}, que exige recomendar la acción de control según la etapa del insecto sin que las etapas estén enumeradas. Corregirlo requiere el ciclo biológico de cada plaga, información entomológica que ninguna de las trece evidencias aporta. Preferimos dejarlo declaradamente incompleto antes que enumerar etapas sin sustento. \newline \emph{Artefacto:} Tabla \ref{tab:defectos}; \S5 del informe PE4.\\ \hline
+\rowcolor{grisclaro}\textbf{11} & \textbf{¿Qué defecto crítico se les escapó y cómo lo detectaron después?}\\ \hline
+& Ninguno de severidad crítica, pero sí seis mayores y uno menor, detectados en la re-inspección de esta unidad. Cuatro se concentran en los apéndices y en los conteos globales, que el alcance de la inspección había excluido de forma expresa; dos son de completitud del conjunto ---faltaban ocho casos de uso y treinta y siete criterios BDD--- y no de corrección de sus elementos. Los detectó la auditoría cuantitativa, no una lectura: M1b arrojó 55,6\,\% al dividir casos especificados entre identificados. \newline \emph{Artefacto:} \S\ref{sec:validacion}, análisis de causa; hoja \emph{Reinspeccion\_M6} del Anexo A.\\ \hline
+\rowcolor{grisclaro}\textbf{12} & \textbf{¿Cómo saben que las correcciones no introdujeron nuevos defectos?}\\ \hline
+& No lo sabemos con certeza, y conviene decirlo así. Lo que hicimos son tres comprobaciones: recompilar el ERS tras cada tanda de correcciones verificando que no aparecen errores ni referencias sin resolver; ejecutar la re-inspección sobre el documento ya corregido, que es precisamente lo que mide M6; y recalcular las seis métricas después de cada acción. Las tres detectan clases distintas de defecto y ninguna las cubre todas. La medición de M6 arrojó 0,11, por encima del 0,05 de referencia, y ese número dice justamente que el proceso de corrección anterior no fue completo. \newline \emph{Artefacto:} \S\ref{sec:metricas}, lectura de M6.\\ \hline
+\end{longtable}
+
+\subsection*{Gestión}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{13} & \textbf{Tomen un RF y díganme qué se rompería si mañana cambia.}\\ \hline
+& \id{RF-28}, el registro de avance por unidad de labor. Es el requisito de mayor acoplamiento de la muestra de M5: afecta a cuatro requisitos. Se rompen \id{RF-29}, porque el acumulado que consulta el trabajador se calcula sobre él; \id{RF-37}, porque la liquidación semanal multiplica ese avance por la tarifa; \id{RF-16}, porque el indicador de desempeño toma el avance como uno de sus tres componentes; y \id{RF-41}, porque la rectificación opera sobre esos registros. Los cuatro se obtienen filtrando la matriz, no estimando. \newline \emph{Artefacto:} hoja \emph{Modificabilidad\_M5} del Anexo A; matriz de trazabilidad.\\ \hline
+\rowcolor{grisclaro}\textbf{14} & \textbf{¿Qué RFC rechazó el CCB y con qué argumento?}\\ \hline
+& \textbf{Ninguna fue rechazada}: las tres se aprobaron, una de ellas con condiciones. Conviene explicar por qué, porque un CCB que aprueba todo puede parecer un trámite. Las tres solicitudes no se eligieron de un catálogo de escenarios: son los tres defectos de la inspección cuya reparación consistía en añadir alcance y no en enmendar un texto, de modo que rechazarlas habría significado dejar abierto un defecto crítico o mayor. Lo que sí hubo fue una alternativa rechazada dentro de \id{RFC-03}: se propuso diferir íntegramente la especificación de los requisitos de la LOPDP a la Entrega 4, y se descartó porque habría dejado \id{DEF-12} sin cerrar y habría obligado a rediseñar más tarde tres funciones que tocan el modelo de datos de personal. Se aprobó una fórmula intermedia: especificar ahora, construir después. \newline \emph{Artefacto:} Acta del CCB, deliberación de \id{RFC-03}.\\ \hline
+\rowcolor{grisclaro}\textbf{15} & \textbf{¿Cuál es la línea base vigente y dónde está etiquetada?}\\ \hline
+& La versión v1.1 del ERS, etiquetada en Git como \id{baseline-v1.1} y, al cierre de esta unidad, como \id{baseline-final}. La versión se declara de forma idéntica en cuatro lugares: portada del ERS, historial de revisiones, \id{CHANGELOG.md} y etiqueta anotada. La comprobación es \verb|git ls-remote --tags origin|, que debe listarla, y la pestaña de \emph{tags} del repositorio. \newline \emph{Artefacto:} \S\ref{sec:gestion}, tabla de versiones; \id{README.md}.\\ \hline
+\end{longtable}
+
+\subsection*{Inteligencia artificial}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{16} & \textbf{¿Qué decide el modelo y qué pasa cuando se equivoca?}\\ \hline
+& \id{IA-01} clasifica una fotografía en una clase de afectación o en \emph{sin afectación}. Un falso negativo retrasa el control hasta la siguiente visita técnica, que es exactamente la situación actual: el componente no empeora la línea base. Un falso positivo provoca una aplicación innecesaria de producto, con costo y exposición del personal. Por eso el umbral de exhaustividad (0,85) es más exigente que el de precisión. Si la confianza baja del umbral, el componente \emph{no emite clasificación}: declara el resultado no concluyente. \newline \emph{Artefacto:} \S\ref{sec:ia}, bloque 1 de \id{IA-01}; \id{RF-IA-02}.\\ \hline
+\rowcolor{grisclaro}\textbf{17} & \textbf{¿Con qué datos lo entrenarían y con qué base legal?}\\ \hline
+& Con fotografías capturadas en la propia plantación durante dos ciclos de cosecha, etiquetadas por la asesoría técnica, más conjuntos públicos de fitopatología cuando haya correspondencia de clase. La imagen de una palma no es dato personal; sí lo son la geolocalización y la identidad de quien captura, que se asocian a ella por \id{RF-05}. La base legal es la ejecución de la relación laboral, Art.~7 de la LOPDP, y \textbf{no el consentimiento}: la asimetría de poder propia de la relación laboral haría que un consentimiento otorgado en ese contexto difícilmente fuera libre. Ambos campos se disocian antes de incorporar la imagen al conjunto. \newline \emph{Artefacto:} \S\ref{sec:ia}, bloque 2 y tabla de tratamiento de datos personales.\\ \hline
+\rowcolor{grisclaro}\textbf{18} & \textbf{¿Cómo medirían que el modelo no perjudica sistemáticamente a un grupo?}\\ \hline
+& Con cuatro requisitos de equidad, y los grupos no son demográficos porque en este dominio el daño no llega por esa vía. \id{RNF-IA-04} y \id{RNF-IA-11} comparan las dos variedades sembradas. \id{RNF-IA-05} compara gamas de dispositivo: como \id{RD-01} establece que el personal usa su propio teléfono, un modelo que rinda peor con cámaras baratas penalizaría a quien tiene el teléfono más económico. El de mayor consecuencia es \id{RNF-IA-10}, que compara cuadrillas con una brecha máxima de 1,5 puntos: \id{RF-24} traza la penalización de la extractora hasta la cuadrilla, de modo que un sesgo produce recortes de remuneración sobre personas identificables. Es el único indicador cuya acción al superarse es \emph{suspender} el uso del modelo. La medición es \emph{a posteriori} sobre el registro de decisiones, porque la cuadrilla se excluye de las variables de entrada. \newline \emph{Artefacto:} \S\ref{sec:ia}, requisitos de equidad y plan de monitoreo.\\ \hline
+\end{longtable}
+
+\subsection*{Métricas}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{19} & \textbf{¿Qué métrica salió peor y qué hicieron al respecto?}\\ \hline
+& Dos respuestas, porque la pregunta admite dos lecturas. La que salió peor en la primera medición fue M3, verificabilidad, con 39,3\,\% frente al 90\,\% de referencia; se cerró reescribiendo treinta y siete criterios en formato Dado--Cuando--Entonces, y conviene precisar que no se modificó ningún umbral: cambió la forma de enunciar la condición, no su contenido. La que sigue incumpliendo es M6, corrección, con 0,11 frente a 0,05. No la corregimos y no podemos: mide qué proporción de defectos escapó a la inspección anterior, y ese numerador es un hecho histórico. Corregir los siete defectos mejora el documento pero no cambia el número. La acción registrada es de proceso: la lista de verificación debe incluir apéndices y conteos globales. \newline \emph{Artefacto:} \S\ref{sec:metricas}, tabla antes/después y lectura de M6.\\ \hline
+\rowcolor{grisclaro}\textbf{20} & \textbf{Enséñenme los conteos con los que calcularon la verificabilidad.}\\ \hline
+& M3 $= 61/61 \times 100 =$ 100\,\%. El denominador son 42 requisitos funcionales más 19 no funcionales; las diez restricciones de diseño y los ocho requisitos legales se auditan aparte porque no son requisitos del sistema sino condiciones impuestas. El numerador son 24 criterios \id{CA-01} a \id{CA-24}, procedentes de las historias de usuario, más 37 criterios \id{CB-01} a \id{CB-37} del Apéndice F. Los conteos no se hicieron a mano: el número de requisitos funcionales es el número de macros \verb|\RF{}| al inicio de línea en las fuentes, y cualquiera puede repetir el conteo con ese patrón. \newline \emph{Artefacto:} hoja \emph{Conteos\_base} del Anexo A, con la procedencia de cada conteo.\\ \hline
+\end{longtable}
+
+\subsection*{Ética}
+
+\begin{longtable}{|C{0.7cm}|L{14.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{21} & \textbf{¿Qué datos personales trata el sistema y cómo se protegen?}\\ \hline
+& Datos identificativos y de contacto del personal, vinculación laboral, registros de avance atribuidos a persona, geolocalización de las capturas e identidad de la cuadrilla. Las medidas son cuatro: cifrado en reposo de la geolocalización con acceso registrado en bitácora (\id{RNF-14}); credenciales almacenadas mediante función de derivación de clave con sal (\id{RNF-13}); disociación de los campos personales antes de incorporar cualquier dato a un conjunto de entrenamiento; y los tres derechos del titular implementados como requisitos funcionales y no como declaraciones: \id{RF-40} acceso, \id{RF-41} rectificación con bitácora y \id{RF-42} supresión con disociación del histórico productivo. Los tres no existían en la Entrega 2A: el ERS enunciaba las obligaciones sin implementarlas, y la inspección lo registró como \id{DEF-12}. \newline \emph{Artefacto:} \S3.4 del ERS; \S\ref{sec:ia}, tabla de base legal.\\ \hline
+\rowcolor{grisclaro}\textbf{22} & \textbf{¿Qué partes del informe fueron asistidas por IA y cómo las validaron?}\\ \hline
+& Cuatro tareas, declaradas en el Anexo E: la extracción programática de los conteos base, la redacción de las especificaciones de \id{CU-11} a \id{CU-18} y de los criterios \id{CB-01} a \id{CB-37}, la construcción de los diagramas de flujo de datos y de la matriz extremo a extremo, y la redacción de la \S9 sobre componentes de IA. La validación fue distinta en cada caso: los conteos se reprodujeron por muestreo con los patrones declarados; los criterios se contrastaron contra el umbral y la unidad que la ficha ya declaraba, comprobando que ninguno introduce valores nuevos; la correspondencia entre procesos, bloques y requisitos se verificó contra la \S3.2 del ERS; y la clasificación de riesgo se contrastó contra el articulado del Reglamento. No fueron asistidas la retrospectiva, el aporte individual ni las decisiones del CCB. \newline \emph{Artefacto:} Anexo E, declaración de uso de IA.\\ \hline
+\end{longtable}
+
+\section{Aporte individual verificable}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Aporte individual por integrante}
+\label{tab:aporte}
+\begin{tabular}{|L{3.1cm}|L{5.2cm}|C{1.5cm}|L{4.8cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Integrante} & \textbf{Aporte principal en la Unidad V} & \textbf{Commits} & \textbf{Artefactos}\\ \hline
+Villafuerte Rosero Allan Noe & Consolidación del ERS v1.1 y redacción de la carátula, la \S1 y la \S2 del informe; instrucción de las tres RFC ante el CCB; publicación de la etiqueta de línea base & \pendiente{n.º} & Fuentes \LaTeX{} del ERS y su bibliografía; \S1 y \S2 del informe; acta del CCB y \id{RFC-01} a \id{RFC-03}\\ \hline
+Huilcapi León Denisses Fabiola & Estructura editorial del informe: resumen bilingüe, \S3, \S6 y \S10; verificación del formato IEEE de las 51 referencias y redacción de la declaración de uso de IA & \pendiente{n.º} & \S3, \S6 y \S10 del informe; anexos y archivo \id{.bib} de referencias\\ \hline
+Rizzo Vélez Edson Nagib & Auditoría de las seis métricas sobre conteos programáticos y re-inspección del ERS corregido; redacción de la \S5, la \S8 y la \S9 del informe & \pendiente{n.º} & Anexo A (auditoría) y Anexo B (registro de defectos) en formato \id{.xlsx}; \S5, \S8 y \S9 del informe\\ \hline
+Macías Herrera Josthyn Esteban & Modelado UML del dominio y especificación de los componentes de inteligencia artificial: fichas, umbrales de equidad y explicabilidad, y clasificación de riesgo & \pendiente{n.º} & Diagramas de casos de uso, clases y estados del ERS; \S4 y \S7 del informe\\ \hline
+Arboleda Yanza Francisco Javier & Construcción de los diagramas de flujo de datos y de las figuras del informe en TikZ y pgfplots; preparación y reparto por bloques de la presentación de defensa & \pendiente{n.º} & Figuras de la \S8 del ERS; diapositivas de defensa y guion de reparto\\ \hline
+Alcívar Vélez Anderson Adonis & Cierre de la trazabilidad extremo a extremo y sincronización del \emph{backlog} con el ERS; estructura del repositorio y redacción del \id{README.md} con las instrucciones de compilación & \pendiente{n.º} & Matriz extremo a extremo y exportación del \emph{backlog} en \id{.xlsx} y \id{.csv}; capturas del tablero; \id{README.md}\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+El recuento de commits se obtiene mediante \verb|git shortlog -sne| sobre el repositorio del equipo y corresponde al corte realizado previo al cierre documental. Los commits posteriores asociados a la incorporación de anexos o ajustes documentales no se consideran en el recuento declarado en esta tabla.
+
+\section{Retrospectiva}
+
+La retrospectiva Start--Stop--Continue completa, con sus doce elementos y sus responsables, se
+presenta en la \S\ref{sec:retro} del cuerpo del informe.
+
+\section{Declaración de uso de inteligencia artificial}
+
+\begin{longtable}{|L{2.4cm}|L{2.2cm}|L{4.4cm}|L{2.4cm}|L{3.2cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Herramienta} & \textbf{Versión} & \textbf{Tarea asistida} & \textbf{Fragmento} & \textbf{Verificación}\\ \hline
+\endhead
+Claude (Anthropic) & Claude Opus 5 & Extracción programática de los conteos base de la auditoría desde las fuentes \LaTeX{} del ERS & \S\ref{sec:metricas}, Anexo A & El equipo reprodujo por muestreo los conteos con los patrones declarados y comprobó que coinciden\\ \hline
+Claude (Anthropic) & Claude Opus 5 & Redacción de las especificaciones de \id{CU-11} a \id{CU-18} y de los criterios \id{CB-01} a \id{CB-37} & \S4 y Apéndice F del ERS & Cada criterio se contrastó contra el umbral y la unidad ya declarados en la ficha del requisito correspondiente; ninguno introduce valores nuevos\\ \hline
+Claude (Anthropic) & Claude Opus 5 & Construcción de los diagramas de flujo de datos en TikZ y de la matriz extremo a extremo & \S8 del ERS, \S\ref{sec:gestion} & El equipo verificó la correspondencia entre procesos, bloques funcionales y requisitos contra la \S3.2 del ERS\\ \hline
+Claude (Anthropic) & Claude Opus 5 & Redacción de la \S9 del ERS sobre componentes de inteligencia artificial & \S\ref{sec:ia} & Los umbrales se contrastaron con los valores ya especificados en \id{RNF-01} a \id{RNF-05}; la clasificación de riesgo se verificó contra el articulado del Reglamento (UE) 2024/1689\\ \hline
+Ninguna & --- & Retrospectiva, aporte individual y decisiones del Change Control Board & \S\ref{sec:retro}, Anexo C & Proceden de artefactos propios del equipo y se redactaron sin asistencia\\ \hline
+\caption{Declaración de uso de asistentes de inteligencia artificial}
+\label{tab:decl-ia}
+\end{longtable}
+
+\vspace{0.4cm}
+\noindent\small
+El equipo declara que la asistencia se empleó como instrumento de extracción, tabulación y redacción,
+y que en ningún caso se incorporó al informe un identificador, una cifra o una referencia que no haya
+sido verificada contra el ERS del SIMPA o contra la fuente citada.\normalsize
+
+\vspace{1.2cm}
+\noindent\begin{tabular}{p{4.8cm} p{4.8cm} p{4.8cm}}
+\hrulefill & \hrulefill & \hrulefill\\
+\footnotesize Villafuerte Rosero Allan Noe & \footnotesize Huilcapi León Denisses Fabiola & \footnotesize Rizzo Vélez Edson Nagib\\[1.4cm]
+\hrulefill & \hrulefill & \hrulefill\\
+\footnotesize Macías Herrera Josthyn Esteban & \footnotesize Arboleda Yanza Francisco Javier & \footnotesize Alcívar Vélez Anderson Adonis\\
+\end{tabular}
