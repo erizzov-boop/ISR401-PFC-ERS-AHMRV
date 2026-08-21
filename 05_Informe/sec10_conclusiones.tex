@@ -1,0 +1,81 @@
+% =====================================================================
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+\subsection*{Conclusión 1 --- Unidad I: el contexto determinó el alcance más que la técnica}
+
+La planificación de la elicitación fijó como objetivo cubrir a los seis perfiles de usuario, y esa
+decisión ---tomada antes de conocer el dominio--- resultó ser la que más restricciones generó. El
+cuestionario ampliado \id{EV-12}, con $n=62$, reveló que el 11,3\,\% del personal no dispone de
+teléfono inteligente y que el 74,2\,\% no tiene señal permanente en el lote. Ambos datos
+contradijeron suposiciones que el equipo había dado por válidas y forzaron dos requisitos que no
+estaban previstos: el registro delegado \id{RF-35} y la operación sin conexión \id{RD-02}.
+
+La conclusión operativa es que la cobertura de la elicitación no es una cuestión de exhaustividad
+metodológica sino de alcance del sistema: si el instrumento no hubiera llegado al personal de campo,
+el ERS habría especificado un sistema que el 11,3\,\% de sus usuarios no podría utilizar, y el
+defecto no habría aparecido hasta el despliegue.
+
+\subsection*{Conclusión 2 --- Unidad II: la evidencia tardía es la más cara}
+
+La evidencia \id{EV-13} ---la hoja de liquidación semanal--- se obtuvo después de haber cerrado la
+especificación, y obligó a incorporar cuatro requisitos funcionales nuevos sobre un proceso que la
+organización ejecuta todas las semanas y que consume una jornada administrativa completa. Ninguna de
+las doce evidencias anteriores lo había identificado.
+
+El costo de esa incorporación tardía es medible y se distribuyó por todo el documento: obligó a
+modificar recuentos en cuatro archivos, produjo la contradicción entre 21 y 19 requisitos
+\emph{Must} que la inspección detectó como defecto crítico, y dejó dos requisitos \emph{Must} sin
+historia de usuario que hubo que tramitar ante el Change Control Board. Un requisito que llega tarde
+no cuesta lo que cuesta especificarlo: cuesta lo que cuesta reconciliar el documento entero con él.
+
+\subsection*{Conclusión 3 --- Unidad III: dos taxonomías del mismo sistema producen defectos}
+
+Once de los treinta y tres defectos detectados en la inspección son de consistencia, y ninguno es de
+redacción. El patrón tiene una causa identificable: el documento mantenía la parte documental
+---bloques funcionales, fichas de requisito--- y la parte de priorización ---MoSCoW, WSJF, matriz---
+como dos representaciones del mismo conjunto de requisitos, sin mecanismo que las reconciliara.
+
+La Unidad V confirmó el diagnóstico desde otro ángulo. Al incorporar los diagramas de flujo de datos,
+la decisión deliberada fue hacer corresponder uno a uno los siete procesos con los siete bloques
+funcionales existentes, en lugar de descomponer el sistema por criterio propio del análisis de flujo.
+El modelo resultante es posiblemente menos fiel que el que habría producido una descomposición
+independiente, y se aceptó esa pérdida precisamente para no crear una tercera taxonomía paralela. El
+acoplamiento medio de 2,20 de la métrica M5 es la consecuencia medible de esa decisión.
+
+\subsection*{Conclusión 4 --- Unidad IV: la inspección es barata y el alcance que se le fija es lo caro}
+
+La inspección formal detectó treinta y tres defectos a un costo de 0,44 horas-persona por defecto, lo
+que sostiene empíricamente el argumento de Fagan sobre el costo relativo de la detección temprana
+\cite{fagan1976}. Pero la re-inspección de la Unidad V encontró siete defectos residuales, y su
+distribución es más informativa que su número: cuatro se concentran en los apéndices y en los
+conteos globales, que el alcance de la inspección había excluido de forma expresa.
+
+La exclusión era razonable cuando se decidió ---los apéndices son material de referencia--- y dejó de
+serlo en cuanto tres solicitudes de cambio modificaron los recuentos que allí residen. Nadie revisó
+la decisión de alcance después de aprobar las RFC. La conclusión no es que la inspección fallara,
+sino que un alcance de inspección es una decisión con fecha de caducidad: caduca cuando cambia el
+documento sobre el que se fijó.
+
+\subsection*{Conclusión 5 --- Unidad V: especificar equidad exige preguntar entre quiénes}
+
+El ERS de la Entrega 2A especificaba exactitud, latencia y explicabilidad para sus componentes
+automáticos, y no especificaba equidad. La ausencia no fue un descuido de redacción: fue un punto
+ciego del modelo de calidad empleado, que no contemplaba la propiedad, y solo se hizo visible al
+formular explícitamente la pregunta de entre qué grupos podía diferir el desempeño del sistema.
+
+La respuesta, en un cultivo de palma, no es demográfica. Los cuatro requisitos de equidad
+especificados comparan variedades sembradas, gamas de dispositivo y cuadrillas de trabajo. El de
+mayor consecuencia es \id{RNF-IA-10}: como \id{RF-24} traza la penalización de la extractora hasta la
+cuadrilla responsable, un modelo que estimara peor las cargas de una cuadrilla concreta produciría
+recortes de remuneración sistemáticamente injustos sobre personas identificables. Es el único
+indicador del plan de monitoreo cuya acción al superarse es suspender el uso del modelo y no
+reentrenarlo.
+
+La conclusión que integra las cinco unidades es esta: el proyecto midió lo que sabía nombrar. Los
+defectos de consistencia aparecieron cuando se contaron las cifras; los casos de uso faltantes,
+cuando se dividió especificados entre identificados; y la ausencia de requisitos de equidad, cuando
+se preguntó entre qué grupos. En los tres casos el problema existía antes de la medición y llevaba
+meses en el documento sin que ninguna lectura lo revelara. La ingeniería de requisitos no consiste
+solo en escribir bien lo que se sabe, sino en construir los instrumentos que hacen visible lo que
+todavía no se ha nombrado.
