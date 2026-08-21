@@ -1,0 +1,19 @@
+\id{RNF-01} & Adecuación funcional & La clasificación de madurez del racimo alcanza una exactitud >= 85\% y una exhaustividad >= 80\% sobre la clase ``verde'' en el conjunto de prueb\\ \hline
+\id{RNF-02} & Adecuación funcional & La detección de plagas alcanza una exactitud >= 80\% sobre las cinco afectaciones más frecuentes del cultivo.\\ \hline
+\id{RNF-03} & Eficiencia de desempeño & Las operaciones de registro y consulta responden en <= 3 s para el percentil 95, con hasta 20 sesiones concurrentes. El valor se deriva de la pob\\ \hline
+\id{RNF-04} & Eficiencia de desempeño & El diagnóstico por imagen entrega resultado en <= 10 s con ancho de banda >= 5 Mbps.\\ \hline
+\id{RNF-05} & Eficiencia de desempeño & El registro GPS captura la ubicación con precisión <= 10 m y período de muestreo <= 30 s.\\ \hline
+\id{RNF-06} & Compatibilidad & La exportación hacia la planta extractora se emite en formato CSV o JSON conforme al esquema documentado, sin campos de identificación personal.\\ \hline
+\id{RNF-07} & Compatibilidad & La aplicación móvil opera en Android 9.0 o superior; el panel web, en las dos últimas versiones estables de Chrome, Edge y Firefox.\\ \hline
+\id{RNF-08} & Interacción de usuario & Una persona sin experiencia previa completa el registro de labor y el análisis de imagen con una tasa de éxito >= 90\% tras una inducción <= 10 m\\ \hline
+\id{RNF-09} & Interacción de usuario & La totalidad de la interfaz se presenta en español, con etiquetas correspondientes a la terminología del glosario y sin abreviaturas técnicas no \\ \hline
+\id{RNF-10} & Fiabilidad & El servicio de respaldo presenta una disponibilidad mensual >= 99\%, equivalente a una indisponibilidad <= 7 h 12 min (720 h 1\%).\\ \hline
+\id{RNF-11} & Fiabilidad & La aplicación opera sin conexión y sincroniza el 100\% de los registros pendientes al restablecerse la conectividad, sin pérdida ni duplicación.\\ \hline
+\id{RNF-12} & Fiabilidad & Ante pérdida de señal GPS, el sistema conserva el registro parcial y lo marca como de precisión degradada, sin descartar la jornada.\\ \hline
+\id{RNF-13} & Seguridad & Las credenciales se almacenan mediante función de derivación de clave con sal; la totalidad del tráfico emplea TLS 1.2 o superior.\\ \hline
+\id{RNF-14} & Seguridad & Los datos de geolocalización se cifran en reposo y su acceso queda registrado en bitácora con identificación de la persona usuaria, fecha y motiv\\ \hline
+\id{RNF-15} & Mantenibilidad & El sistema presenta arquitectura modular con cobertura de pruebas automatizadas >= 60\% en la capa de lógica de negocio.\\ \hline
+\id{RNF-16} & Interacción de usuario & Explicabilidad - véase la especificación ampliada en la §3.3.1.\\ \hline
+\id{RNF-17} & Flexibilidad (reemplazabilidad) & La migración del servicio de inferencia a un proveedor alternativo no requiere modificar el cliente móvil, al mediar una interfaz de servicio des\\ \hline
+\id{RNF-18} & Flexibilidad (adaptabilidad) & Los umbrales de madurez, de porcentaje de fruta verde y de ventana corte-entrega son parametrizables por variedad y por lote sin recompilar la ap\\ \hline
+\id{RNF-19} & Seguridad física (safety) & Toda recomendación de control fitosanitario emitida por el sistema (RF-09) incluye, de forma no omisible, el equipo de protección personal exigid\\ \hline
