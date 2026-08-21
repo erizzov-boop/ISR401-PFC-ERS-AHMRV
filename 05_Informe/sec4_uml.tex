@@ -1,0 +1,84 @@
+\section{Modelos UML y de procesos}
+\label{sec:uml}
+
+\subsection{Cobertura del modelado}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Modelos elaborados y su función en la especificación}
+\label{tab:modelos}
+\begin{tabular}{|L{4.2cm}|C{1.6cm}|L{8.8cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Modelo} & \textbf{Cantidad} & \textbf{Qué responde que los demás no responden}\\ \hline
+Diagrama de contexto & 1 & Dónde está la frontera del sistema y qué queda fuera\\ \hline
+Modelado i* (SD y SR) & 2 & Qué depende cada actor de los demás, y por qué querría usar el sistema\\ \hline
+Casos de uso & 18 & Qué secuencia de pasos produce cada resultado, con sus alternativas y excepciones\\ \hline
+Diagrama de clases refinado & 1 & Qué entidades del dominio existen y cómo se relacionan\\ \hline
+Diagramas de secuencia & 3 & Cómo colaboran los objetos en los flujos más críticos\\ \hline
+Diagrama de actividad & 1 & Cómo se encadena el ciclo semanal completo\\ \hline
+Diagramas de estados & 2 & Qué ciclo de vida siguen el racimo y la alerta\\ \hline
+Diagramas de flujo de datos & 2 & Qué proceso transforma qué dato y dónde se almacena\\ \hline
+Componentes y despliegue & 2 & Cómo se reparte la funcionalidad y dónde se ejecuta\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Lectura interpretativa de los modelos principales}
+
+\subsubsection*{Casos de uso: el hallazgo de la auditoría}
+
+El diagrama general identifica dieciocho casos de uso, pero hasta esta unidad solo diez tenían
+especificación textual. Los ocho restantes ---\id{CU-11} a \id{CU-18}--- existían como nodo del
+diagrama y como referencia en la matriz, sin flujo, sin precondición y sin excepciones.
+
+El vacío no lo detectó ninguna revisión de contenido: lo detectó la métrica M1b al dividir casos
+especificados entre casos identificados y obtener 55,6\,\%. Es un ejemplo de por qué una auditoría
+cuantitativa aporta algo que la lectura no aporta: un lector que recorre el documento de principio a
+fin ve diez casos de uso bien especificados y no echa en falta los que no están.
+
+Los ocho se especificaron en esta unidad con el mismo formato que los diez anteriores. Dos merecen
+comentario. \id{CU-16} (generar alerta temprana) tiene como actor primario al propio sistema, que
+actúa sin intervención humana; su flujo alternativo B evita la duplicación de alertas equivalentes,
+que es el defecto que produciría un panel inservible por saturación. \id{CU-18} (explicar una
+decisión automática) es incluido obligatoriamente por los tres casos de uso con decisión automática,
+de modo que la explicabilidad no es una función que el usuario invoque sino una condición de la
+propia emisión del resultado.
+
+\subsubsection*{Diagramas de estados: dos entidades y por qué solo dos}
+
+Se modelan el racimo y la alerta. La elección no es arbitraria ni exhaustiva: son las dos entidades
+del dominio cuyo ciclo de vida determina una consecuencia económica y cuya transición no es trivial.
+
+El estado \emph{Degradado} del racimo materializa el hallazgo de \id{EV-04} sobre la ventana entre
+corte y entrega: el material híbrido tolera un intervalo mayor por su contenido de antioxidantes,
+mientras que el \emph{guineensis} se deshidrata en dos o tres días. Sin ese estado, la ventana
+corte--entrega de \id{RF-25} sería una regla sin objeto sobre el que aplicarse.
+
+El estado \emph{Descartada} de la alerta corresponde a los falsos positivos del modelo de diagnóstico
+y alimenta el ciclo de reentrenamiento previsto en \id{RNF-15} y \id{RNF-17}. Es el punto donde el
+modelo de estados y los componentes de inteligencia artificial se tocan: un falso positivo no es solo
+un error que se descarta, es un dato de entrenamiento.
+
+\subsubsection*{Diagramas de flujo de datos: por qué se incorporaron ahora}
+
+Los diagramas de flujo de datos se incorporaron en esta unidad, no en la de modelado. La razón es
+concreta: la cadena de trazabilidad extremo a extremo exige enlazar cada requisito con el proceso que
+lo realiza, y sin diagrama de flujo de datos esa columna quedaría vacía.
+
+La decisión de diseño que conviene declarar es la correspondencia uno a uno entre los siete procesos
+del nivel 1 y los siete bloques funcionales de la \S3.2 del ERS. No es una coincidencia del dominio:
+se adoptó deliberadamente para que la introducción del modelo no obligara a reclasificar ningún
+requisito ya especificado y para que un cambio en un requisito se propague por una sola ruta. La
+alternativa ---descomponer el sistema por criterio propio del análisis de flujo--- habría producido
+un modelo posiblemente más fiel pero con dos taxonomías paralelas del mismo sistema, que es
+exactamente el mecanismo que generó los defectos de consistencia detectados en la Unidad IV.
+
+\subsubsection*{Modelado i*: lo que aportó y lo que no}
+
+Los diagramas SD y SR modelan las dependencias entre actores antes de que exista un sistema. Su
+aporte concreto al proyecto fue detectar que la planta extractora es una parte interesada con poder
+alto e interés medio, cuya calificación de calidad es una dependencia externa que el sistema no
+controla pero de la que depende una función completa (\id{RF-23}, \id{RF-24}).
+
+Lo que no aportó, y conviene decirlo: el modelado i* no produjo requisitos que la elicitación no
+hubiera producido ya. Su valor fue de encuadre y de verificación cruzada, no de descubrimiento.
+
