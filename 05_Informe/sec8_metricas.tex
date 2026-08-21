@@ -1,0 +1,178 @@
+\section{Métricas de calidad del ERS}
+\label{sec:metricas}
+
+\subsection{Diseño del instrumento de auditoría}
+
+La auditoría emplea seis métricas derivadas del modelo de calidad de producto de
+ISO/IEC 25010:2023 \cite{iso25010} y de las características de un buen conjunto de requisitos de
+ISO/IEC/IEEE 29148:2018 \cite{iso29148}. Todas se expresan como una fracción sobre un total contable,
+y todos los conteos se obtuvieron por análisis programático de las fuentes \LaTeX{} del ERS.
+
+Esa última decisión merece justificarse. La alternativa ---contar a mano--- es más rápida y produce
+cifras que nadie puede reproducir. Contar sobre las fuentes significa que el denominador de cada
+métrica es el resultado de un patrón declarado: el número de requisitos funcionales es el número de
+macros \verb|\RF{}| al inicio de línea, y el número de casos de uso especificados es el número de
+tablas con \verb|\caption{CU-XX}|. Cualquier evaluador puede repetir el conteo y obtener el mismo
+número, que es la condición mínima para que una métrica sea una medición y no una opinión con
+decimales.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Conteos base de la auditoría}
+\label{tab:conteos}
+\begin{tabular}{|L{7.2cm}|C{1.8cm}|L{6.0cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Concepto} & \textbf{Valor} & \textbf{Procedencia}\\ \hline
+Requisitos funcionales & 42 & Macros \verb|\RF{}| al inicio de línea\\ \hline
+Requisitos no funcionales & 19 & Filas \id{RNF-XX} de la Tabla 49\\ \hline
+Total auditado (RF + RNF) & 61 & Suma de los anteriores\\ \hline
+Casos de uso identificados & 18 & Referencias \id{CU-XX} en diagrama y matriz\\ \hline
+Casos de uso especificados & 18 & Tablas con \verb|\caption{CU-XX}|\\ \hline
+Clases de usuario & 6 & Tabla de clases de usuario de la \S2.3\\ \hline
+Requisitos con criterio BDD & 61 & 24 criterios \id{CA-XX} y 37 criterios \id{CB-XX}\\ \hline
+Filas de la matriz & 73 & \id{TR-01} a \id{TR-73}\\ \hline
+Defectos residuales & 7 & Re-inspección de la \S\ref{sec:validacion}\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Tabla de auditoría con la aritmética de cada métrica}
+
+\begin{longtable}{|L{3.4cm}|L{3.2cm}|C{1.8cm}|C{1.5cm}|C{1.4cm}|C{1.3cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Métrica} & \textbf{Fórmula} & \textbf{Aritmética} & \textbf{Valor} & \textbf{Ref.} & \textbf{Cumple}\\ \hline
+\endfirsthead
+\hline
+\rowcolor{grisclaro}\textbf{Métrica} & \textbf{Fórmula} & \textbf{Aritmética} & \textbf{Valor} & \textbf{Ref.} & \textbf{Cumple}\\ \hline
+\endhead
+M1a Completitud de atributos & requisitos con los 4 atributos / requisitos & $(42{+}19)/61$ & 100\,\% & $\geq 95$\,\% & Sí\\ \hline
+M1b Especificación de casos de uso & CU especificados / CU identificados & $18/18$ & 100\,\% & 100\,\% & Sí\\ \hline
+M1c Cobertura de actores & actores con $\geq 1$ RF / actores & $6/6$ & 100\,\% & 100\,\% & Sí\\ \hline
+M2 Consistencia & $1 -$ conflictos / pares analizados & $1-2/210$ & 0,990 & $\geq 0{,}98$ & Sí\\ \hline
+M3 Verificabilidad & requisitos con criterio BDD / requisitos & $61/61$ & 100\,\% & $\geq 90$\,\% & Sí\\ \hline
+M3b Verificabilidad en \emph{Must} & \emph{Must} con criterio BDD / \emph{Must} & $24/24$ & 100\,\% & 100\,\% & Sí\\ \hline
+M4ade Trazabilidad adelante & RF con cadena completa / RF & $42/42$ & 100\,\% & $\geq 90$\,\% & Sí\\ \hline
+M4atr Trazabilidad atrás & RF con fuente / RF & $42/42$ & 100\,\% & 100\,\% & Sí\\ \hline
+M5 Modificabilidad & $\sum$ requisitos afectados / muestra & $11/5$ & 2,20 & $\leq 3{,}0$ & Sí\\ \hline
+M6 Corrección & defectos residuales / requisitos & $7/61$ & 0,11 & $\leq 0{,}05$ & \textbf{No}\\ \hline
+\caption{Auditoría de calidad del ERS final}
+\label{tab:auditoria}
+\end{longtable}
+
+\subsection{Comparación antes y después de las acciones de mejora}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Métricas antes y después de las acciones de mejora}
+\label{tab:antes-despues}
+\begin{tabular}{|L{3.6cm}|C{1.6cm}|C{1.6cm}|C{1.5cm}|L{6.0cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Métrica} & \textbf{Antes} & \textbf{Después} & \textbf{Ref.} & \textbf{Acción aplicada}\\ \hline
+M1a Completitud & 98,4\,\% & 100\,\% & $\geq 95$\,\% & \id{RES-04}: se clasificó \id{RNF-19} en el Apéndice C\\ \hline
+\rowcolor{grissuave}M1b Casos de uso & \textbf{55,6\,\%} & 100\,\% & 100\,\% & \id{RES-05}: se especificaron \id{CU-11} a \id{CU-18}\\ \hline
+\rowcolor{grissuave}M1c Actores & \textbf{75,0\,\%} & 100\,\% & 100\,\% & \id{RES-07}: reconteo tras distinguir clase de usuario de parte interesada\\ \hline
+M2 Consistencia & 0,990 & 0,990 & $\geq 0{,}98$ & Sin acción; los dos conflictos quedaron cerrados\\ \hline
+\rowcolor{grissuave}M3 Verificabilidad & \textbf{39,3\,\%} & 100\,\% & $\geq 90$\,\% & \id{RES-06}: 37 criterios reescritos en formato BDD\\ \hline
+M4 Trazabilidad & 100\,\% & 100\,\% & $\geq 90$\,\% & Los DFD aportan el eslabón de proceso\\ \hline
+M5 Modificabilidad & 2,20 & 2,20 & $\leq 3{,}0$ & Sin acción\\ \hline
+\rowcolor{rojosuave}M6 Corrección & \textbf{0,11} & \textbf{0,11} & $\leq 0{,}05$ & Sin acción posible; véase la lectura siguiente\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Lectura interpretativa de cada métrica}
+
+\subsubsection*{M1 Completitud: lo que una métrica ve y una lectura no}
+
+Los tres indicadores de completitud arrojaron resultados muy distintos: 98,4\,\% en atributos,
+55,6\,\% en casos de uso y 75,0\,\% en cobertura de actores. Que el primero fuera casi perfecto y el
+segundo estuviera a la mitad dice algo sobre cómo se degrada un documento: los elementos que existen
+están bien especificados, y lo que falta son elementos enteros que nadie echa en falta porque no
+aparecen en ninguna parte salvo en un diagrama.
+
+Ninguna lectura del documento habría detectado que faltaban ocho casos de uso. La métrica lo detectó
+en una división.
+
+\subsubsection*{M2 Consistencia: el denominador es la decisión}
+
+M2 se calcula como uno menos la razón entre conflictos detectados y pares analizados. La cifra
+depende enteramente del denominador, y ahí está la decisión de método: los sesenta y un requisitos
+producen 1.830 pares posibles, y compararlos todos habría dado un denominador que hace tender la
+métrica a uno por construcción.
+
+Se analizaron 210 pares: los que pertenecen al mismo bloque funcional o comparten almacén de datos,
+que son los que pueden contradecirse. Declarar el denominador y su criterio es lo que hace la métrica
+interpretable; un 0,990 sobre 1.830 pares y un 0,990 sobre 210 no son la misma afirmación.
+
+\subsubsection*{M3 Verificabilidad: qué cambió realmente}
+
+La métrica pasó de 39,3\,\% a 100\,\%, y el salto es el mayor de la auditoría. Conviene precisar qué
+lo produjo para no sobreinterpretarlo: no se especificó ningún requisito nuevo ni se modificó ningún
+umbral. Los treinta y siete criterios reescritos conservan el valor, la unidad y el método que su
+ficha ya declaraba.
+
+Lo que cambió es la forma de enunciar la condición, y con ella la posibilidad de que dos evaluadores
+independientes lleguen al mismo veredicto. Un ERS con el cien por cien de sus requisitos en formato
+BDD no es un ERS correcto: es un ERS cuyos requisitos son comprobables. La corrección se mide aparte,
+con M6, y su valor es peor.
+
+\subsubsection*{M4 Trazabilidad: la métrica que obligó a producir un modelo}
+
+M4 hacia adelante exige que cada requisito enlace con caso de uso, módulo, proceso y prueba. El
+eslabón de proceso no existía porque el ERS no tenía diagramas de flujo de datos, de modo que la
+métrica no podía calcularse sin producir antes el modelo que faltaba.
+
+Es el único caso de la auditoría en que medir obligó a construir. Y el resultado indirecto fue más
+valioso que el directo: los DFD no solo cerraron la columna, sino que hicieron explícita la
+correspondencia entre bloque funcional, módulo y proceso, que hasta entonces era una convención
+tácita del equipo.
+
+\subsubsection*{M5 Modificabilidad: por qué 2,20 es un buen número}
+
+El acoplamiento medio de 2,20 significa que modificar un requisito obliga a revisar algo más de dos
+requisitos adicionales. El valor se mantiene bajo por una razón concreta y no por suerte: la
+correspondencia uno a uno entre bloque funcional, módulo y proceso del DFD hace que un cambio se
+propague por una sola ruta.
+
+La muestra de cinco requisitos combina bloques distintos y las tres prioridades MoSCoW, para no medir
+solo el núcleo del sistema. El requisito de mayor acoplamiento resultó ser \id{RF-28}, el registro de
+avance, del que dependen la liquidación, el indicador de desempeño y la rectificación: es
+consistente con que sea también el requisito con más casos de uso asociados.
+
+\subsubsection*{M6 Corrección: la única métrica que no puede corregirse}
+
+M6 es la única que no cumple, y es la única cuya corrección no depende de actuar sobre el documento.
+Mide qué proporción de defectos escapó a la inspección de la Unidad IV: siete defectos residuales
+sobre sesenta y un requisitos, es decir 0,11 frente al 0,05 de referencia.
+
+Los siete están corregidos. Corregirlos, sin embargo, no altera el numerador, porque el numerador es
+un hecho sobre la eficacia de aquella inspección y no sobre el estado actual del documento. Bajar la
+cifra exigiría declarar una re-inspección que no se hizo o descontar los defectos ya reparados, y
+cualquiera de las dos cosas convertiría la métrica en un adorno.
+
+Se reporta tal cual. La acción correctiva registrada es de proceso y no de producto: la lista de
+verificación de la inspección debe incluir los apéndices y los conteos globales, y debe incorporar
+preguntas sobre la completitud del conjunto y no solo sobre la corrección de sus elementos. Es donde
+se concentraron seis de los siete.
+
+\subsection{Valoración global}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Valoración ponderada de la auditoría}
+\label{tab:valoracion}
+\begin{tabular}{|L{4.6cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|L{4.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Métrica} & \textbf{Peso} & \textbf{Nivel (0--4)} & \textbf{Aporte} & \textbf{Criterio del nivel}\\ \hline
+M1 Completitud & 0,20 & 4 & 0,80 & Cumple con evidencia completa tras la acción correctiva\\ \hline
+M2 Consistencia & 0,15 & 4 & 0,60 & Cumple; conflictos detectados, documentados y cerrados\\ \hline
+M3 Verificabilidad & 0,20 & 4 & 0,80 & Cumple; 61 de 61 requisitos con criterio comprobable\\ \hline
+M4 Trazabilidad & 0,20 & 4 & 0,80 & Cumple en ambos sentidos, sin huérfanos\\ \hline
+M5 Modificabilidad & 0,10 & 4 & 0,40 & Cumple sobre muestra representativa\\ \hline
+M6 Corrección & 0,15 & 2 & 0,30 & Por debajo de la referencia, con acción correctiva de proceso aplicada\\ \hline
+\textbf{Total} & \textbf{1,00} & --- & \textbf{3,70} & Sobre 4,00\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+El 3,70 sobre 4,00 se sostiene en cinco métricas cumplidas y una incumplida con acción documentada.
+La lectura honesta del conjunto no es que el ERS sea bueno, sino que el ERS \emph{es ahora} medible:
+antes de esta unidad no existía un instrumento capaz de decir si lo era.
