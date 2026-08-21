@@ -1,0 +1,201 @@
+%=======================================================================
+%  PE5 -- Practica Experimental Unidad V
+%  Proyecto Integrador de Ingenieria de Requisitos (ISR-401) -- UTEQ
+%  Equipo AHMRV -- Paralelo 4to "A"
+%  Villafuerte Rosero, Huilcapi Leon, Rizzo Velez,
+%  Macias Herrera, Arboleda Yanza, Alcivar Velez
+%
+%  COMPILACION (tres pasadas obligatorias):
+%     pdflatex PE5_U5_PFC_ALCIVAR_ARBOLEDA_HUILCAPI_MACIAS_RIZZO_VILLAFUERTE
+%     bibtex   PE5_U5_PFC_ALCIVAR_ARBOLEDA_HUILCAPI_MACIAS_RIZZO_VILLAFUERTE
+%     pdflatex PE5_U5_PFC_ALCIVAR_ARBOLEDA_HUILCAPI_MACIAS_RIZZO_VILLAFUERTE
+%     pdflatex PE5_U5_PFC_ALCIVAR_ARBOLEDA_HUILCAPI_MACIAS_RIZZO_VILLAFUERTE
+%
+%  DEPENDENCIAS NO INCLUIDAS EN UNA INSTALACION MINIMA:
+%     texlive-lang-spanish   (spanish.ldf)
+%     texlive-publishers     (IEEEtran.bst)
+%     texlive-science        (siunitx)
+%     texlive-pictures       (pgfplots, tikz)
+%=======================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Carga condicional: si falta el modulo de espanol, el documento compila igual
+\IfFileExists{spanish.ldf}{\usepackage[spanish,es-tabla]{babel}}{}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlength{\emergencystretch}{3em}
+\graphicspath{{figuras/}}
+\sisetup{output-decimal-marker={,}}
+
+\definecolor{grisclaro}{RGB}{224,224,224}
+\definecolor{grissuave}{RGB}{243,243,243}
+\definecolor{verdesuave}{RGB}{226,239,218}
+\definecolor{rojosuave}{RGB}{252,232,232}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% Columna centrada vertical y horizontalmente: evita que el filete del
+% identificador sobresalga por debajo en filas de varias lineas
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\id}[1]{\texttt{#1}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize PE5 --- Proyecto Integrador de Ingeniería de Requisitos}
+\fancyhead[R]{\footnotesize ISR-401 --- UTEQ}
+\fancyfoot[C]{\footnotesize Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+%=======================================================================
+% CARATULA
+%=======================================================================
+\begin{titlepage}
+\centering
+\vspace*{0.8cm}
+
+{\large\textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\\[0.3cm]
+{\normalsize Facultad de Ciencias de la Computación}\\[0.2cm]
+{\normalsize Carrera de Software (Rediseño)}\\[1.4cm]
+
+{\large\textbf{PRÁCTICA EXPERIMENTAL --- UNIDAD V}}\\[0.5cm]
+{\Large\textbf{Integración, Métricas y Defensa del Proyecto Integrador}}\\[0.4cm]
+{\normalsize Auditoría de calidad ISO/IEC 25010:2023 · Trazabilidad extremo a extremo · Requisitos de componentes de inteligencia artificial}\\[1.4cm]
+
+{\normalsize\textbf{Sistema del Proyecto Fin de Curso}}\\[0.3cm]
+{\large SIMPA --- Sistema Inteligente de Mantenimiento de Palma Africana}\\[0.2cm]
+{\footnotesize Documento base: ERS/SRS del SIMPA, versión 1.1 final}\\[1.2cm]
+
+{\normalsize\textbf{Integrantes}}\\[0.3cm]
+\begin{tabular}{L{5.8cm} L{3.6cm} L{3.4cm}}
+\toprule
+\textbf{Integrante} & \textbf{Rol} & \textbf{Usuario de GitHub}\\
+\midrule
+Villafuerte Rosero Allan Noe & Analista líder & \texttt{AlanNVR}\\
+Huilcapi León Denisses Fabiola & Documentadora & \texttt{huilcapi}\\
+Rizzo Vélez Edson Nagib & Verificador & \texttt{erizzov-boop}\\
+Macías Herrera Josthyn Esteban & Modelador & \texttt{jmaciasherr4}\\
+Arboleda Yanza Francisco Javier & Apoyo modelado & \texttt{farboleday-wq}\\
+Alcívar Vélez Anderson Adonis & Apoyo repositorio & \texttt{AdonisAlcivar}\\
+\bottomrule
+\end{tabular}\\[1.2cm]
+
+{\normalsize\textbf{Asignatura:} Ingeniería de Requerimientos (ISR-401) --- 4.º nivel}\\[0.2cm]
+{\normalsize\textbf{Docente:} Ing. Gleiston Cicerón Guerrero Ulloa, PhD}\\[0.2cm]
+{\normalsize\textbf{Periodo académico:} 2026--2027 PPA}\\[0.2cm]
+{\normalsize\textbf{Fecha:} 21/08/2026}\\[1.2cm]
+
+{\normalsize\textbf{Repositorio del trabajo}}\\[0.2cm]
+{\small\url{https://github.com/erizzov-boop/ISR401-PFC-ERS-AHMRV}}
+
+\end{titlepage}
+
+%=======================================================================
+% RESUMEN BILINGUE
+%=======================================================================
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+
+Este informe integra las cinco unidades del Proyecto Fin de Curso de Ingeniería de Requerimientos
+sobre el SIMPA, sistema de gestión y diagnóstico para el cultivo de palma aceitera desarrollado con
+una organización real del cantón El Empalme. El trabajo audita la Especificación de Requisitos de
+Software final con seis métricas derivadas de ISO/IEC 25010:2023, calculadas sobre conteos
+programáticos de las propias fuentes del documento y no sobre estimaciones. La primera medición
+detectó cuatro métricas por debajo de su valor de referencia: la especificación de casos de uso, la
+cobertura de actores, la verificabilidad y la corrección. Las tres primeras se cerraron especificando
+ocho casos de uso, reescribiendo treinta y siete criterios de aceptación en formato Dado--Cuando--Entonces
+y declarando la distinción entre clase de usuario y parte interesada. La cuarta se reporta sin
+corregir, porque mide un hecho histórico sobre la eficacia de la inspección anterior. El trabajo
+cierra la trazabilidad extremo a extremo en setenta y tres filas con ocho eslabones, incorpora los
+diagramas de flujo de datos que faltaban y especifica dieciocho requisitos para dos componentes de
+inteligencia artificial, con sus umbrales de rendimiento, equidad y explicabilidad, su clasificación
+de riesgo conforme al Reglamento (UE) 2024/1689 y su plan de monitoreo en producción.
+
+\vspace{0.3cm}
+\noindent\textbf{Palabras clave:} ingeniería de requisitos, métricas de calidad, ISO/IEC 25010,
+trazabilidad extremo a extremo, requisitos de inteligencia artificial, equidad algorítmica.
+
+\vspace{0.8cm}
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+This report integrates the five units of the Requirements Engineering final course project on SIMPA,
+a management and diagnosis system for oil palm cultivation developed with a real organisation in the
+El Empalme canton. The work audits the final Software Requirements Specification using six metrics
+derived from ISO/IEC 25010:2023, computed from programmatic counts over the document sources rather
+than from estimates. The first measurement found four metrics below their reference value: use case
+specification, actor coverage, verifiability and correctness. The first three were closed by
+specifying eight use cases, rewriting thirty-seven acceptance criteria in Given--When--Then format,
+and stating explicitly the distinction between user class and stakeholder. The fourth is reported
+uncorrected, since it measures a historical fact about the effectiveness of the previous inspection.
+The work closes end-to-end traceability across seventy-three rows with eight links, incorporates the
+missing data flow diagrams, and specifies eighteen requirements for two artificial intelligence
+components, including performance, fairness and explainability thresholds, risk classification under
+Regulation (EU) 2024/1689, and a production monitoring plan.
+
+\vspace{0.3cm}
+\noindent\textbf{Keywords:} requirements engineering, quality metrics, ISO/IEC 25010, end-to-end
+traceability, artificial intelligence requirements, algorithmic fairness.
+
+\newpage
+
+%=======================================================================
+% INDICES
+%=======================================================================
+\tableofcontents
+\newpage
+\listoftables
+\addcontentsline{toc}{section}{Índice de tablas}
+\listoffigures
+\addcontentsline{toc}{section}{Índice de figuras}
+\newpage
+
+%=======================================================================
+% SECCIONES
+%=======================================================================
+\input{sec1_introduccion}
+\input{sec2_metodologia}
+\input{sec3_ers}
+\input{sec4_uml}
+\input{sec5_validacion}
+\input{sec6_gestion}
+\input{sec7_ia}
+\input{sec8_metricas}
+\input{sec9_retrospectiva}
+\input{sec10_conclusiones}
+
+%=======================================================================
+% REFERENCIAS
+%=======================================================================
+\newpage
+\IfFileExists{IEEEtran.bst}{\bibliographystyle{IEEEtran}}{\bibliographystyle{unsrt}}
+\bibliography{referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+%=======================================================================
+% ANEXOS
+%=======================================================================
+\newpage
+\input{anexos}
+
+\end{document}
