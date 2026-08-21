@@ -1,0 +1,62 @@
+\section{Retrospectiva del equipo}
+\label{sec:retro}
+
+\subsection{Método}
+
+La retrospectiva se ejecuta con el formato Start--Stop--Continue: qué empezar a hacer, qué dejar de
+hacer y qué mantener. El formato obliga a que cada elemento sea accionable y tenga responsable, lo
+que lo distingue de una valoración general del trabajo.
+
+Los elementos que siguen son los que el equipo identificó en la sesión de cierre, y cada uno se apoya
+en un hecho verificable del proyecto y no en una impresión.
+
+Son doce: cuatro de \emph{Start}, cuatro de \emph{Stop} y cuatro de \emph{Continue}.
+
+\subsection{Start --- qué empezar a hacer}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Retrospectiva: elementos Start}
+\label{tab:start}
+\begin{tabular}{|C{1.2cm}|L{6.4cm}|L{4.4cm}|C{2.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{N.º} & \textbf{Acción} & \textbf{Hecho que la motiva} & \textbf{Responsable}\\ \hline
+S1 & Incluir la actualización del tablero CASE en el procedimiento de cierre de toda RFC, del mismo modo que ya lo está la actualización del \id{CHANGELOG.md} & El índice de sincronización entre el ERS y Jira era del 67,1\,\%: 41 elementos aprobados no se habían propagado al tablero & Alcívar A.\\ \hline
+S2 & Ampliar el alcance de la inspección a los apéndices y a los conteos globales cuando el documento haya sufrido cambios aprobados & Cuatro de los siete defectos residuales se concentran ahí, fuera del alcance declarado en la Unidad IV & Rizzo E.\\ \hline
+S3 & Incorporar a la lista de verificación preguntas sobre la completitud del conjunto y no solo sobre la corrección de sus elementos & Ningún inspector detectó que faltaban ocho casos de uso, porque ninguna pregunta obligaba a contar cuántos debían existir & Rizzo E.\\ \hline
+S4 & Medir antes de corregir, y no al revés & La auditoría detectó en una división lo que tres lecturas del documento no habían detectado & Macías J.\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Stop --- qué dejar de hacer}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Retrospectiva: elementos Stop}
+\label{tab:stop}
+\begin{tabular}{|C{1.2cm}|L{6.4cm}|L{4.4cm}|C{2.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{N.º} & \textbf{Acción} & \textbf{Hecho que la motiva} & \textbf{Responsable}\\ \hline
+T1 & Dejar de declarar cifras agregadas en varios lugares del documento sin una fuente única & Once de los treinta y tres defectos de la inspección son de consistencia entre secciones que declaran la misma cifra & Huilcapi D.\\ \hline
+T2 & Dejar de dar por válida una declaración de conformidad normativa sin verificar la estructura de la norma citada & La cobertura declarada de las nueve características de ISO/IEC 25010:2023 no se sostenía: se empleaba una subcaracterística como característica de primer nivel & Rizzo E.\\ \hline
+T3 & Dejar de asumir supuestos sobre el contexto sin dato que los respalde & Dos restricciones de diseño se justificaban con suposiciones que la evidencia \id{EV-12} había invalidado & Villafuerte A.\\ \hline
+T4 & Dejar de aceptar el mensaje que la interfaz web de GitHub propone por defecto al subir archivos & 45 de los 84 \emph{commits} del repositorio de la Unidad IV (\id{ISR401-PFC-ERS-EQUIPO\_B}) usan ``Add files via upload'' o ``Rename\ldots'': el historial documenta qué archivo cambió, pero no por qué & Alcívar A.\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Continue --- qué mantener}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Retrospectiva: elementos Continue}
+\label{tab:continue}
+\begin{tabular}{|C{1.2cm}|L{6.4cm}|L{4.4cm}|C{2.4cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{N.º} & \textbf{Acción} & \textbf{Hecho que la motiva} & \textbf{Responsable}\\ \hline
+C1 & Mantener la preparación individual previa a la inspección, con marca temporal verificable & Los cuatro roles superaron el mínimo de seis defectos y ninguno concentró más del 33\,\% del total: el reparto por secciones funcionó & Macías J.\\ \hline
+C2 & Mantener las fuentes del ERS versionadas junto al PDF & Permitió reconstruir, corregir y recompilar el documento en cada unidad sin rehacerlo & Arboleda F.\\ \hline
+C3 & Mantener la derivación del análisis de impacto desde la matriz y no por estimación & Las tres RFC declararon identificadores de fila verificables en el artefacto & Arboleda F.\\ \hline
+C4 & Mantener la declaración expresa de los vacíos en lugar de rellenarlos & Los requisitos sin prototipo, las restricciones sin criterio BDD y las filas sin estado se declaran; un vacío declarado es un dato, uno oculto es un defecto & Villafuerte A.\\ \hline
+\end{tabular}
+\end{table}
+
