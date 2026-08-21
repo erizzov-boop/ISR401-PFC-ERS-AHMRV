@@ -1,0 +1,182 @@
+% =====================================================================
+\section{Metodología de ingeniería de requisitos}
+\label{sec:metodologia}
+
+\subsection{Marco normativo aplicado}
+
+El ERS se estructura conforme a ISO/IEC/IEEE 29148:2018, que define el contenido de una
+especificación de requisitos de software y las características exigibles a un requisito individual y
+al conjunto \cite{iso29148}. La calidad del producto documental se interpreta con el modelo de
+ISO/IEC 25010:2023, del que la \S\ref{sec:metricas} deriva seis métricas operativas
+\cite{iso25010}. El encuadre de procesos de ciclo de vida proviene de ISO/IEC/IEEE 15288:2023 para
+sistemas y de ISO/IEC/IEEE 12207:2017 para software \cite{iso15288, iso12207}, que sitúan la
+definición de requisitos de las partes interesadas y el análisis de requisitos del sistema dentro de
+los procesos técnicos.
+
+Los fundamentos conceptuales siguen a Pohl \cite{pohl2025} y al SWEBOK v4.0 \cite{swebok4}, y la
+lista de verificación de calidad de la especificación se apoya en el temario CPRE Foundation Level
+del IREB \cite{ireb31}. La gestión del proyecto integrador se organiza con los principios del PMBOK
+7.ª edición \cite{pmbok7}.
+
+Para los componentes de inteligencia artificial concurren dos marcos adicionales: el Reglamento
+(UE) 2024/1689, que clasifica los sistemas por nivel de riesgo e impone obligaciones proporcionales
+\cite{aiact2024}, y la Ley Orgánica de Protección de Datos Personales del Ecuador, que rige el
+tratamiento de los datos personales que el sistema recoge \cite{lopdp2021}.
+
+\subsection{Fundamento teórico}
+
+\subsubsection*{Validación frente a verificación}
+
+La distinción es anterior a cualquier técnica y condiciona qué se puede concluir de una inspección.
+Verificar es comprobar que el documento está bien construido conforme a un estándar; validar es
+comprobar que especifica lo que las partes interesadas necesitan \cite{pohl2025}. Un ERS puede
+superar la verificación y fallar la validación: sus requisitos serían completos, consistentes y
+verificables, y describirían un sistema que nadie pidió.
+
+ISO/IEC/IEEE 29148:2018 sitúa la validación en su cláusula 6.4 y enumera las características
+exigibles a un requisito individual ---necesario, apropiado, no ambiguo, completo, singular,
+factible, verificable, correcto y conforme--- y al conjunto ---completo, consistente, factible,
+comprensible, capaz de ser validado \cite{iso29148}. Las seis métricas de la
+\S\ref{sec:metricas} operacionalizan seis de esas características; las restantes no se midieron
+porque no admiten un conteo objetivo sin introducir juicio del auditor.
+
+\subsubsection*{Técnicas de validación y el método Fagan}
+
+Las técnicas de validación se ordenan por grado de formalidad: revisión informal, recorrido
+(\emph{walkthrough}), inspección formal, prototipado y listas de verificación \cite{pohl2025,
+swebok4}. El método de Fagan es la inspección formal canónica y aporta tres elementos que las
+técnicas menos formales no tienen: roles diferenciados con responsabilidad distinta, preparación
+individual obligatoria antes de la reunión, y prohibición expresa de discutir soluciones durante la
+sesión \cite{fagan1976}.
+
+Los tres elementos responden al mismo problema. Sin roles, todos leen igual y detectan lo mismo. Sin
+preparación individual, el primer comentario ancla al grupo. Y sin la prohibición de discutir
+soluciones, la sesión deriva hacia el diseño y deja de recorrer el documento. Las métricas de
+inspección ---densidad de defectos, distribución por tipo y severidad, tasa de detección por
+inspector y esfuerzo--- permiten evaluar el proceso y no solo su resultado.
+
+\subsubsection*{Gestión de requisitos: línea base, trazabilidad y cambio}
+
+La gestión de la configuración de un ERS descansa en la noción de línea base: una versión aprobada y
+congelada que sirve de referencia y a partir de la cual todo cambio se tramita \cite{swebok4}. Sin
+línea base no hay control de cambios posible, porque no existe el estado respecto del cual algo
+cambia.
+
+La trazabilidad se distingue en \emph{pre-traceability} ---del requisito hacia su origen--- y
+\emph{post-traceability} ---del requisito hacia los artefactos que lo realizan--- \cite{gotel1994}.
+Ambas direcciones responden preguntas distintas: la primera, por qué existe un requisito; la segunda,
+qué hay que tocar si cambia. La matriz de la \S\ref{sec:gestion} las implementa como columnas hacia
+atrás y hacia adelante de una misma cadena.
+
+El proceso de cambio ---solicitud formal, análisis de impacto, decisión de un órgano colegiado,
+implementación y cierre--- sigue el modelo de control integrado de cambios del PMBOK
+\cite{pmbok7}. La literatura de trazabilidad advierte de que el análisis de impacto estimado sin
+recorrer la matriz es la causa más frecuente de subestimación del costo de un cambio
+\cite{clelandhuang2012}.
+
+\subsubsection*{Herramientas CASE y trazabilidad en entornos ágiles}
+
+Las herramientas CASE de gestión de requisitos se clasifican por su posición en el ciclo de vida
+---\emph{upper}, \emph{lower}, integradas--- y por el conjunto de funcionalidades esperables:
+repositorio, atributos tipados, trazabilidad multinivel, \emph{baselining}, control de cambios,
+colaboración e integración con el control de versiones \cite{wiegers2013}.
+
+En entornos ágiles la trazabilidad no desaparece: se reconstruye por convención sobre el mensaje de
+\emph{commit} y la vinculación de ramas a la incidencia \cite{clelandhuang2012}. El formato de
+historia de usuario \cite{cohn2004} y el criterio de aceptación en notación Gherkin \cite{smart2014}
+cumplen el papel que en la especificación documental cumplen la ficha de requisito y su criterio de
+verificación. El proyecto mantiene ambas representaciones, y la \S\ref{sec:gestion} cuantifica el
+costo de esa convivencia.
+
+\subsubsection*{Ingeniería de requisitos para sistemas con aprendizaje automático}
+
+Especificar un componente cuyo comportamiento se induce de datos plantea problemas que la ingeniería
+de requisitos clásica no aborda. El resultado es probabilístico, de modo que un criterio de
+aceptación binario no aplica y hay que sustituirlo por una métrica con umbral y conjunto de
+evaluación declarado. La calidad depende del conjunto de datos tanto como del modelo, lo que convierte
+las propiedades de los datos en requisitos. Y aparecen categorías de calidad nuevas ---explicabilidad
+y ausencia de discriminación--- que ningún modelo de calidad tradicional contemplaba
+\cite{vogelsang2024, chazette2021}.
+
+A esos requisitos técnicos se suman los normativos. El Reglamento (UE) 2024/1689 adopta un enfoque
+basado en riesgo: prohíbe determinadas prácticas, impone obligaciones reforzadas a los sistemas de
+alto riesgo enumerados en su Anexo III, y establece obligaciones de transparencia cuando el sistema
+interactúa directamente con personas \cite{aiact2024}. La normativa ecuatoriana de protección de
+datos personales rige el tratamiento de los datos que alimentan el modelo y los derechos del titular
+sobre ellos \cite{lopdp2021}. La \S\ref{sec:ia} aplica ambos marcos al SIMPA y declara la
+clasificación resultante con su razonamiento.
+
+\subsection{Proceso seguido a lo largo de las cinco unidades}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Proceso de ingeniería de requisitos por unidad}
+\label{tab:proceso}
+\begin{tabular}{|C{1.4cm}|L{4.0cm}|L{4.6cm}|L{4.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Unidad} & \textbf{Actividad} & \textbf{Técnicas empleadas} & \textbf{Artefacto producido}\\ \hline
+I & Fundamentos y planificación & Análisis del dominio, identificación de partes interesadas, matriz poder/interés & Plan de elicitación y mapa de partes interesadas\\ \hline
+II & Elicitación y análisis & Entrevista semiestructurada, cuestionario, observación de campo, análisis de documentos & Trece evidencias (\id{EV-01} a \id{EV-13}) y catálogo de requisitos brutos\\ \hline
+III & Especificación y modelado & Fichas de requisito conforme a 29148, casos de uso, modelado i*, UML, diagramas de flujo de datos & ERS de las Entregas 1B y 2A; modelos UML e i*\\ \hline
+IV & Validación y gestión & Inspección formal tipo Fagan, Change Control Board simulado, trazabilidad en Jira, línea base con Git & Registro de 33 defectos, tres RFC, acta del CCB, línea base \id{baseline-v1.1}\\ \hline
+V & Integración y auditoría & Auditoría con métricas de 25010, re-inspección, especificación de componentes de IA & Instrumento de auditoría, matriz extremo a extremo, \S9 del ERS\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Decisiones metodológicas y su justificación}
+
+Cuatro decisiones condicionaron el resultado y merecen justificarse, porque en cada una había una
+alternativa razonable que se descartó.
+
+\subsubsection*{Elicitación con instrumentos mixtos y no solo con entrevistas}
+
+La elicitación combinó entrevista semiestructurada con la administración, cuestionario al personal de
+campo y observación directa. La razón es una asimetría documentada en \id{EV-07}: la administración
+declara con soltura los procesos formales, pero el personal de campo ---sesenta y dos personas con
+competencia digital declarada como baja--- no responde bien al formato de entrevista. Basar la
+elicitación solo en entrevistas habría producido un catálogo de requisitos que refleja cómo la
+administración cree que funciona el campo, y no cómo funciona.
+
+El cuestionario ampliado \id{EV-12}, con $n=62$, es el que aportó los dos datos que más restricciones
+generaron: que el 11,3\,\% del personal no dispone de teléfono inteligente y que el 74,2\,\% no tiene
+señal permanente en el lote. Ambos datos contradijeron suposiciones que el equipo había dado por
+válidas y obligaron a especificar \id{RF-35} (registro delegado) y \id{RD-02} (operación sin
+conexión).
+
+\subsubsection*{Priorización con tres técnicas y no con una}
+
+La priorización combina MoSCoW, el modelo de Kano y el cálculo WSJF. MoSCoW por sí solo produce
+categorías sin orden interno: veinticuatro requisitos \emph{Must} no dicen cuál construir primero.
+Kano aporta la distinción entre lo que satisface y lo que se da por supuesto. WSJF aporta el orden
+dentro de la categoría, ponderando valor de negocio, urgencia, reducción de riesgo y tamaño.
+
+El resultado de combinarlas no fue redundante. \id{RF-35} ---el registro delegado para quien no tiene
+teléfono--- encabeza el orden de implementación con un WSJF de 7,00 pese a no ser el requisito de
+mayor valor de negocio: lo que lo eleva es la reducción de riesgo, porque sin él el 11,3\,\% del
+personal quedaría fuera del sistema y el registro de avance sería incompleto por diseño.
+
+\subsubsection*{Inspección formal y no revisión informal}
+
+La Unidad IV empleó el método Fagan con roles diferenciados, preparación individual previa registrada
+con marca temporal y prohibición expresa de discutir soluciones durante la sesión \cite{fagan1976}.
+La alternativa ---una revisión conjunta del documento--- es más barata y detecta menos: sin
+preparación individual, la sesión se convierte en una lectura colectiva donde el primer comentario
+ancla al resto del grupo.
+
+El resultado empírico sostiene la decisión: treinta y tres defectos únicos sobre sesenta y tres
+páginas efectivas, con una densidad de 0,52 defectos por página, y ningún rol por debajo del mínimo
+de seis defectos preparados.
+
+\subsubsection*{Formato BDD para los criterios de aceptación}
+
+La Unidad V reescribió treinta y siete criterios de verificación en formato Dado--Cuando--Entonces
+\cite{smart2014}. La alternativa era conservarlos en prosa, que es como estaban y que no es
+incorrecto. La razón del cambio es que un criterio en prosa admite que dos evaluadores lleguen a
+veredictos distintos sobre el mismo resultado, mientras que la plantilla obliga a fijar contexto,
+evento y resultado observable. La verificabilidad, tal como la define ISO/IEC/IEEE 29148:2018, no es
+que exista un criterio sino que el criterio permita decidir \cite{iso29148}.
+
+Conviene precisar el alcance de ese cambio, porque es fácil sobreinterpretarlo: no se especificó
+ningún requisito nuevo ni se modificó ningún umbral. Cambió la forma de enunciar la condición, no su
+contenido.
+

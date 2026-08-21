@@ -1,0 +1,75 @@
+\section{Introducción}
+\label{sec:intro}
+
+\subsection{Problema y contexto}
+
+La palma aceitera es un cultivo perenne cuya rentabilidad depende de decisiones que se toman en
+ventanas de tiempo estrechas y sobre información que hoy no se registra. El proyecto se desarrolla
+con una organización productora del cantón El Empalme, provincia del Guayas, que explota
+aproximadamente cien hectáreas distribuidas en seis lotes y emplea a sesenta y dos personas.
+
+El trabajo de elicitación de las unidades anteriores documentó tres problemas que el sistema debe
+atender y que conviene enunciar antes que cualquier consideración técnica, porque son los que
+justifican el proyecto:
+
+\begin{enumerate}[leftmargin=*, nosep]
+  \item \textbf{La detección fitosanitaria depende de una visita quincenal.} Entre visitas de la
+        asesoría técnica, una afectación avanza sin que nadie la registre. El personal de campo la
+        observa pero no dispone de un medio para clasificarla ni para dejar constancia.
+  \item \textbf{La penalización por fruta verde se decide sobre un juicio visual.} La planta
+        extractora aplica un descuento cuando el porcentaje de fruta verde supera un umbral, y la
+        decisión de cortar se toma con una estimación hecha a ojo en el momento del corte.
+  \item \textbf{La liquidación semanal se calcula a mano.} La evidencia \id{EV-13} documenta que el
+        cálculo de la remuneración del personal consume una jornada administrativa completa cada
+        semana y se realiza sobre anotaciones en papel.
+\end{enumerate}
+
+Ninguno de los tres es un problema de software. Son problemas de operación agrícola cuya solución
+pasa por registrar información que hoy se pierde, y esa distinción es la que gobierna todo el
+documento: el SIMPA no automatiza porque se pueda, sino donde la falta de registro tiene una
+consecuencia económica medible sobre la organización o sobre las personas que trabajan en ella.
+
+\subsection{El sistema}
+
+El SIMPA ---Sistema Inteligente de Mantenimiento de Palma Africana--- es una aplicación móvil con
+panel web de administración que cubre siete bloques funcionales: gestión de la estructura productiva,
+planificación y seguimiento de labores, registro operativo de campo, polinización asistida,
+diagnóstico asistido por inteligencia artificial, calidad de la fruta y relación con la extractora, y
+reportes, estimación e histórico.
+
+La versión final del ERS especifica 42 requisitos funcionales, 19 no funcionales, 10 restricciones de
+diseño y 8 requisitos legales derivados de la Ley Orgánica de Protección de Datos Personales, más 18
+requisitos específicos de los dos componentes de inteligencia artificial que esta unidad incorpora.
+
+\subsection{Objetivos de esta práctica}
+
+\noindent\textbf{Objetivo general.} Integrar, auditar y defender el proyecto: aplicar métricas de
+calidad al ERS final, cerrar la trazabilidad extremo a extremo, especificar los requisitos de los
+componentes de inteligencia artificial y sostener las decisiones de ingeniería ante el tribunal.
+
+\noindent\textbf{Objetivos específicos.}
+
+\begin{enumerate}[leftmargin=*, nosep]
+  \item Construir un instrumento de auditoría con seis métricas calculadas sobre conteos verificables
+        de las fuentes del propio documento.
+  \item Corregir toda métrica por debajo de su valor de referencia y volver a medir, presentando el
+        par antes/después.
+  \item Cerrar la trazabilidad extremo a extremo, incorporando los eslabones de proceso, estado y
+        criterio de aceptación que la cadena anterior no tenía.
+  \item Especificar dos componentes de inteligencia artificial con sus requisitos de rendimiento,
+        equidad y explicabilidad, su clasificación de riesgo y su plan de monitoreo.
+  \item Consolidar la versión final del ERS y documentar el aporte individual verificable.
+\end{enumerate}
+
+\subsection{Estructura del documento}
+
+La \S\ref{sec:metodologia} describe el proceso de ingeniería de requisitos seguido a lo largo de las
+cinco unidades y justifica las decisiones metodológicas. La \S\ref{sec:ers} presenta la estructura
+del ERS final y sus requisitos clave. La \S\ref{sec:uml} recorre los modelos con lectura
+interpretativa. La \S\ref{sec:validacion} expone la inspección formal, sus defectos y la
+re-inspección de esta unidad. La \S\ref{sec:gestion} trata la línea base, el control de cambios y la
+matriz de trazabilidad final. La \S\ref{sec:ia} especifica los componentes de inteligencia
+artificial. La \S\ref{sec:metricas} presenta la auditoría de calidad con la aritmética de cada
+métrica. La \S\ref{sec:retro} recoge la retrospectiva y la \S\ref{sec:conclusiones} cierra con cinco
+conclusiones, una por unidad.
+
