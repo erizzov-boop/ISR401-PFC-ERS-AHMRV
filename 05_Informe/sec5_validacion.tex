@@ -1,0 +1,165 @@
+% =====================================================================
+\section{Validación de requisitos}
+\label{sec:validacion}
+
+\subsection{Inspección formal de la Unidad IV}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Parámetros y resultados de la inspección formal tipo Fagan}
+\label{tab:inspeccion}
+\begin{tabular}{|L{6.4cm}|L{8.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Parámetro} & \textbf{Valor}\\ \hline
+Documento inspeccionado & ERS/SRS del SIMPA v1.0 (Entrega 2A)\\ \hline
+Alcance & \S1 a \S7; apéndices A--E excluidos\\ \hline
+Páginas efectivas & 63 (pp. 8--70)\\ \hline
+Roles & Moderador, Lector, Inspector 1 e Inspector 2, con acumulación declarada de dos roles en un integrante\\ \hline
+Conformación del equipo en la inspección & Tres integrantes (conformación vigente en la Unidad IV)\\ \hline
+Defectos únicos consolidados & 33\\ \hline
+Distribución por severidad & 4 críticos, 24 mayores, 5 menores\\ \hline
+Distribución por tipo & Consistencia 11, completitud 6, verificabilidad 5, ambigüedad 4, trazabilidad 4, factibilidad 3\\ \hline
+Densidad de defectos & 0,52 defectos por página\\ \hline
+Esfuerzo & 14,5 horas-persona; 0,44 horas-persona por defecto detectado\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+Una precisión sobre la conformación del equipo antes de leer los resultados. La inspección se ejecutó
+con los tres integrantes que componían el equipo de práctica experimental en la Unidad IV, lo que
+obligó a acumular dos de los cuatro roles exigidos en un mismo participante; la acumulación se
+declaró en su momento y no se disimula aquí. Con posterioridad a la inspección, el docente reagrupó
+los equipos de práctica experimental conforme a los equipos del Proyecto Fin de Curso, con lo que
+este equipo pasó a seis integrantes y la acumulación dejó de ser necesaria para trabajos ulteriores.
+Los parámetros de la tabla anterior, la tasa de detección por rol y las métricas de inspección
+corresponden a la ejecución original y no se recalculan: miden un hecho ocurrido en una fecha
+determinada y con unos participantes determinados. Recalcularlos sobre la conformación actual
+supondría atribuir a seis personas una detección que realizaron tres.
+
+\vspace{0.3cm}
+\noindent
+Dos lecturas de esos números importan más que los números mismos.
+
+La primera es la distribución por tipo. Once de los treinta y tres defectos son de consistencia y
+ninguno es de sintaxis o de redacción. El documento sabía qué debía especificar; lo que fallaba era
+que las mismas cifras se declaraban de forma distinta en secciones distintas. Es la firma de un
+documento crecido por adición, sin una pasada de reconciliación final, y no la de un documento mal
+escrito.
+
+La segunda es el esfuerzo por defecto. Detectar un defecto costó menos de media hora-persona, cifra
+que sostiene el argumento de Fagan de que la inspección es más barata que la corrección tardía
+\cite{fagan1976}. El defecto \id{DEF-02} ---la contradicción entre 21 y 19 requisitos \emph{Must}---
+habría llegado al diseño y habría producido dos planificaciones incompatibles.
+
+\subsection{Corrección y gestión del cambio}
+
+De los veintiocho defectos de severidad crítica y mayor, veinticinco se corrigieron directamente
+sobre las fuentes y tres se tramitaron ante el Change Control Board por exceder el alcance de una
+corrección editorial: su reparación consistía en añadir alcance al sistema, no en enmendar un texto.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Defectos derivados al Change Control Board}
+\label{tab:def-ccb}
+\begin{tabular}{|C{1.6cm}|C{1.6cm}|L{5.4cm}|L{6.0cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Defecto} & \textbf{RFC} & \textbf{Naturaleza y contenido} & \textbf{Decisión}\\ \hline
+\id{DEF-13} & \id{RFC-01} & Alcance: \id{RF-36} y \id{RF-37} son \emph{Must} y carecían de historia de usuario & Aprobado por unanimidad\\ \hline
+\id{DEF-16} & \id{RFC-02} & Calidad: la cobertura de las nueve características de ISO/IEC 25010:2023 no se sostenía & Aprobado por unanimidad\\ \hline
+\id{DEF-12} & \id{RFC-03} & Normativa: \id{RL-04} a \id{RL-06} enunciaban obligaciones de la LOPDP sin requisito que las implementara & Aprobado con condiciones\\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+La deliberación sobre \id{RFC-03} merece registrarse porque el Change Control Board aprobó un cambio
+que \emph{empeora} una métrica del propio proyecto. Incorporar \id{RF-40} a \id{RF-42} eleva los
+requisitos \emph{Must} de veintiuno a veinticuatro y reduce la cobertura declarada del prototipo del
+38,1\,\% al 33,3\,\%. El argumento que decidió la votación fue que el cumplimiento de una obligación
+legal no se negocia contra un indicador de avance, y que el riesgo de omitirla recae sobre la
+organización. Un órgano de control que solo aprobara lo que mejora sus indicadores no estaría
+gobernando alcance sino administrando apariencia.
+
+\subsection{Registro completo de defectos}
+
+\begin{longtable}{|M{1.5cm}|L{2.4cm}|L{7.4cm}|M{1.9cm}|M{1.5cm}|}
+\caption{Registro consolidado de los 33 defectos detectados en la inspección formal}
+\label{tab:defectos}\\
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Sección} & \textbf{Descripción abreviada} & \textbf{Tipo} & \textbf{Sev.}\\ \hline
+\endfirsthead
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Sección} & \textbf{Descripción abreviada} & \textbf{Tipo} & \textbf{Sev.}\\ \hline
+\endhead
+\input{tabla_defectos}
+\end{longtable}
+
+\subsection{Métricas de la inspección e interpretación}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Métricas de la inspección formal y su lectura}
+\label{tab:met-inspeccion}
+\begin{tabular}{|L{3.8cm}|L{3.6cm}|L{7.6cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{Métrica} & \textbf{Valor} & \textbf{Qué revela del ERS}\\ \hline
+Densidad de defectos & 0,52 def./página & Con más de un defecto cada dos páginas, el documento no falla en un punto aislado sino de forma distribuida: apunta a un problema de integración entre secciones redactadas por separado\\ \hline
+Distribución por tipo & Consistencia 11; completitud 6; verificabilidad 5; ambigüedad 4; trazabilidad 4; factibilidad 3 & La consistencia concentra un tercio: el documento sabe qué especificar, pero las mismas cifras se declaran distinto en secciones distintas\\ \hline
+Distribución por severidad & 4 críticos; 24 mayores; 5 menores & El predominio de la severidad mayor sobre la menor indica que los defectos son de contenido especificado y no de forma\\ \hline
+Tasa de detección por rol & Inspector 2: 11; Inspector 1: 8; Moderador: 7; Lector: 7 & Los cuatro roles superan el mínimo de seis y ninguno concentra más del 33\,\%: el reparto por secciones funcionó\\ \hline
+Esfuerzo & 14,5 h-persona; 0,44 h-persona por defecto & Detectar un defecto costó menos de media hora-persona, cifra que justifica repetir la inspección antes de la siguiente entrega\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Re-inspección de la Unidad V}
+
+La métrica de corrección de la auditoría requiere medir cuántos defectos sobrevivieron a la
+inspección. Esa medición exige una re-inspección sobre el documento ya corregido, y su resultado es
+el siguiente.
+
+\begin{longtable}{|C{1.6cm}|L{4.0cm}|L{5.4cm}|C{1.5cm}|L{2.8cm}|}
+\hline
+\rowcolor{grisclaro}\textbf{ID} & \textbf{Ubicación} & \textbf{Defecto residual} & \textbf{Sev.} & \textbf{Estado}\\ \hline
+\endhead
+\id{RES-01} & Apéndice, diccionario de identificadores & Declara el rango de requisitos funcionales como \id{RF-01} a \id{RF-39}, cuando \id{RFC-03} lo elevó a \id{RF-42} & Mayor & Corregido\\ \hline
+\id{RES-02} & Apéndice, diccionario de identificadores & Declara el rango de no funcionales como \id{RNF-01} a \id{RNF-18}, cuando \id{RFC-02} incorporó \id{RNF-19} & Mayor & Corregido\\ \hline
+\id{RES-03} & Tabla de recuentos de la \S5.1 & Declara 39 requisitos funcionales y 18 no funcionales, cifras anteriores a las RFC & Mayor & Corregido\\ \hline
+\id{RES-04} & Apéndice C & \id{RNF-19} no figura en la tabla de priorización: es el único requisito del catálogo sin prioridad MoSCoW & Mayor & Corregido\\ \hline
+\id{RES-05} & \S4, casos de uso & Ocho de los dieciocho casos de uso identificados carecen de especificación textual & Mayor & Corregido\\ \hline
+\id{RES-06} & \S5.2, criterios de aceptación & Solo 24 de 61 requisitos tienen criterio en formato Dado--Cuando--Entonces & Mayor & Corregido\\ \hline
+\id{RES-07} & \S2.3 y fichas & Dos partes interesadas se contaban como clases de usuario sin ser actor de ningún requisito & Menor & Corregido\\ \hline
+\caption{Defectos residuales detectados en la re-inspección de la Unidad V}
+\label{tab:residuales}
+\end{longtable}
+
+\subsection{Por qué escaparon: análisis de causa}
+
+Los siete defectos residuales no se distribuyen al azar, y su patrón dice algo sobre el
+procedimiento de inspección más que sobre el documento.
+
+\textbf{Cuatro se concentran en los apéndices y en los conteos globales} (\id{RES-01} a \id{RES-04}).
+El alcance declarado de la inspección de la Unidad IV fue \S1 a \S7, con los apéndices excluidos de
+forma expresa. La exclusión era razonable ---los apéndices son material de referencia--- pero dejó
+fuera precisamente el lugar donde se acumulan los recuentos que las tres RFC modificaron. La causa no
+es descuido: es que el alcance se fijó antes de saber qué iban a cambiar las RFC, y nadie lo revisó
+después.
+
+\textbf{Dos son de completitud del conjunto, no de corrección de sus elementos} (\id{RES-05},
+\id{RES-06}). La lista de verificación empleada preguntaba si cada elemento revisado era correcto, no
+si el conjunto estaba completo. Un inspector que recorre diez casos de uso bien especificados
+responde ``sí cumple'' a todas las preguntas, y ninguna le obliga a contar cuántos deberían existir.
+
+\textbf{Uno es un defecto de la propia auditoría} (\id{RES-07}). La primera medición de la cobertura
+de actores contó ocho actores mezclando la tabla de clases de usuario con el mapa de partes
+interesadas, y arrojó 75\,\% cuando el valor real era 100\,\%. Se corrigió el conteo y se añadió al
+ERS una nota que declara la distinción, de modo que la métrica no vuelva a medirse mal. Es el único
+de los siete que no era un defecto del ERS sino del instrumento que lo mide, y se documenta como tal
+en lugar de retirarlo del registro.
+
+\subsection{Acción correctiva de proceso}
+
+Las siete correcciones están aplicadas, pero la conclusión operativa no es haberlas aplicado. Es que
+la lista de verificación de la inspección debe modificarse en dos puntos para la siguiente entrega:
+incluir los apéndices y los conteos globales dentro del alcance cuando el documento haya sufrido
+cambios aprobados, e incorporar preguntas sobre la completitud del conjunto y no solo sobre la
+corrección de sus elementos. Corregir siete defectos mejora este documento; cambiar la lista de
+verificación mejora todos los siguientes.
