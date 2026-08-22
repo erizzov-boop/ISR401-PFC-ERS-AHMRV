@@ -149,29 +149,41 @@ lugar de rellenarlos:
 \subsubsection*{Sincronización entre el ERS y el tablero CASE}
 
 La trazabilidad solo es útil si el tablero refleja el documento. El contraste cuantitativo entre
-ambos artefactos, antes de la actualización del backlog, es el siguiente:
+ambos artefactos, antes y después de la actualización del backlog, es el siguiente:
 
 \begin{table}[H]
 \centering\footnotesize
 \caption{Sincronización entre el ERS y el tablero de Jira}
 \label{tab:sincro}
-\begin{tabular}{|L{5.4cm}|C{1.8cm}|C{2.0cm}|C{1.8cm}|L{4.4cm}|}
+\begin{tabular}{|L{4.6cm}|C{1.5cm}|C{1.6cm}|C{1.6cm}|C{1.6cm}|C{1.6cm}|}
 \hline
-\rowcolor{grisclaro}\textbf{Elemento} & \textbf{En el ERS} & \textbf{En el tablero} & \textbf{Divergencia} & \textbf{Acción}\\ \hline
-Epics / bloques funcionales & 7 & 7 & 0 & Sin divergencia\\ \hline
-Stories / requisitos funcionales & 48 & 39 & 9 & Cargar \id{RF-40} a \id{RF-42} y \id{RF-IA-01} a \id{RF-IA-06}\\ \hline
-Sub-tasks / criterios de aceptación & 79 & 38 & 41 & Cargar \id{CB-01} a \id{CB-37} y los 18 criterios de la \S9\\ \hline
-Historias de usuario & 24 & 19 & 5 & Cargar \id{HU-20} a \id{HU-24}\\ \hline
-Filas de trazabilidad & 73 & 52 & 21 & Reexportar el CSV\\ \hline
-\multicolumn{3}{|r|}{\textbf{Índice de sincronización}} & \multicolumn{2}{l|}{\textbf{67,1\,\%}}\\ \hline
+\rowcolor{grisclaro}\textbf{Elemento} & \textbf{En el ERS} & \textbf{Tablero inicial} & \textbf{Diverg. inicial} & \textbf{Tablero final} & \textbf{Diverg. final}\\ \hline
+Epics / bloques funcionales & 10 & 7 & 3 & 10 & 0\\ \hline
+Stories / requisitos & 79 & 39 & 40 & 79 & 0\\ \hline
+Sub-tasks / criterios de aceptación & 79 & 38 & 41 & 86 & 0\\ \hline
+Historias de usuario & 24 & 19 & 5 & 24 & 0\\ \hline
+Filas de trazabilidad & 73 & 52 & 21 & 73 & 0\\ \hline
+\multicolumn{3}{|r|}{\textbf{Índice de sincronización}} & \textbf{58,5\,\%} & & \textbf{100\,\%}\\ \hline
 \end{tabular}
 \end{table}
 
 \noindent
-El 67,1\,\% mide la proporción de elementos del ERS reflejados en el tablero \emph{antes} de esta
-práctica, y la divergencia tiene una causa única y verificable: la carga inicial del backlog se
-ejecutó en la Unidad~IV, antes de que el Change Control Board aprobara \id{RFC-01} a \id{RFC-03}. Los
-cambios se implementaron en el documento y no se propagaron al tablero.
+La cifra publicada al cierre de la Unidad~IV fue 67,1\,\%. Se conserva aquí porque es la que consta
+en aquel informe, pero el denominador con que se calculó era incompleto: contabilizaba 48 elementos
+especificados donde el ERS especifica 79, porque no computaba los diecinueve requisitos no
+funcionales ni los doce \id{RNF-IA} como elementos que el tablero debía reflejar. Recalculada sobre
+el denominador completo, la sincronización de partida era del 58,5\,\%.
+
+Que el punto de partida fuera peor que el declarado no es un detalle aritmético. Significa que el
+indicador que debía medir la desincronización estaba él mismo desincronizado: se ignoraba no solo
+cuántos elementos faltaban, sino cuántos debían estar. Un instrumento de medición cuyo denominador
+depende de lo que se recuerde incluir mide la memoria del equipo, no el estado del tablero.
+
+La divergencia inicial tiene dos causas verificables. La primera, que la carga del backlog se
+ejecutó en la Unidad~IV, antes de que el Change Control Board aprobara \id{RFC-01} a \id{RFC-03}:
+los cambios se implementaron en el documento y no se propagaron al tablero. La segunda, que los
+requisitos no funcionales nunca llegaron a cargarse, hecho que no se detectó hasta auditar el
+tablero elemento por elemento en esta unidad.
 
 El hallazgo es más interesante que el número. Un backlog desincronizado no es un descuido puntual:
 es la consecuencia previsible de mantener dos representaciones del mismo conjunto de requisitos sin
@@ -180,3 +192,11 @@ defectos de consistencia detectados en la inspección. La acción correctiva reg
 cargar los elementos que faltan, sino incorporar al procedimiento de cierre de cada RFC la
 actualización del tablero como paso obligatorio, del mismo modo que ya lo es la actualización del
 \id{CHANGELOG.md}.
+
+Al cierre de esta unidad la sincronización es del 100\,\%: los 175 elementos del tablero ---diez
+epics, setenta y nueve \emph{stories} y ochenta y seis \emph{sub-tasks}--- cubren la totalidad de lo
+especificado. Las siete \emph{sub-tasks} que exceden a los criterios del documento son tareas de
+verificación creadas por el equipo para su propio seguimiento y no derivan de un criterio de
+aceptación, por lo que no se computan como divergencia: el índice mide si algo especificado quedó
+sin cargar, no si el tablero contiene elementos adicionales. El respaldo es la exportación
+\id{backlog\_export.csv} del Apéndice de trazabilidad.
